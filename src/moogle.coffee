@@ -38,9 +38,9 @@ Moogle = (I) ->
         
       # Move around based on input
       if keydown.d
-        I.velocity.x += 0.5
+        I.velocity.x += 0.75
       if keydown.a
-        I.velocity.x -= 0.5
+        I.velocity.x -= 0.75
       unless keydown.a || keydown.d
         I.velocity.x = 0
       unless keydown.w
