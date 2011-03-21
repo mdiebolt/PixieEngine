@@ -4,7 +4,8 @@ Moogle = (I) ->
   GRAVITY = Point(0, 1)
   
   $.reverseMerge I,
-    animations: StateAnimation.fromPixieId 44, -> animationsLoaded = true
+    animations: StateAnimation.fromPixieId 44, -> 
+      window.animationsLoaded = true
     color: "blue"
     speed: 6
     solid: false
@@ -12,8 +13,6 @@ Moogle = (I) ->
     height: 48
     velocity: Point(0, 0)
     excludedModules: ["Movable"]
-    
-  log I.animations
 
   # Cast acceleration and velocity to points
   I.velocity = Point(I.velocity.x, I.velocity.y)
@@ -23,7 +22,7 @@ Moogle = (I) ->
   lastDirection = 1
   shooting = false
   laserEndpoint = null
-  animationsLoaded = false
+  window.animationsLoaded = false
   
   PHYSICS =
     platform: () ->
