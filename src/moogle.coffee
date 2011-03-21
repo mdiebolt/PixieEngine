@@ -4,8 +4,7 @@ Moogle = (I) ->
   GRAVITY = Point(0, 1)
   
   $.reverseMerge I,
-    animations: StateAnimation.fromPixieId 44, -> 
-      window.animationsLoaded = true
+    animations: StateAnimation.fromPixieId 44
     color: "blue"
     speed: 6
     solid: false
