@@ -77,7 +77,7 @@ Moogle = (I) ->
         animation.draw(canvas, 15, 260)
             
       update: ->
-        if I.age % 5 == 0
+        if I.age % 3 == 0
           animation.update()
       
         if engine.collides(self.bounds(0, 1))
