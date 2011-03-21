@@ -1,4 +1,4 @@
-( ->
+(->
   StateAnimation = (data) ->  
     spriteLookup = {}
     activeAnimation = data.animations[0]
@@ -29,7 +29,7 @@
     fromPixieId(App.Animations[name], callback)
  
   fromPixieId = (id, callback) ->
-    url = "pixie.strd6.com/s3/animations/#{id}/data.json"
+    url = "http://pixie.strd6.com/s3/animations/#{id}/data.json"
   
     proxy =
       active: $.noop
