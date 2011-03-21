@@ -12,6 +12,8 @@ Moogle = (I) ->
     height: 48
     velocity: Point(0, 0)
     excludedModules: ["Movable"]
+    
+  log I.animations
 
   # Cast acceleration and velocity to points
   I.velocity = Point(I.velocity.x, I.velocity.y)
