@@ -23,8 +23,6 @@
             currentSprite = data.animations[name].frames[0] 
         else
           return activeAnimation
-          
-    return data
 
   window.StateAnimation = (name, callback) ->
     fromPixieId(App.Animations[name], callback)
