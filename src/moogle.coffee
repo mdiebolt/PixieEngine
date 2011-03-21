@@ -68,7 +68,7 @@ Moogle = (I) ->
     before:
       draw: (canvas) ->
         canvas.fillColor Color("Fuzzy Wuzzy Brown")
-        canvas.fillCircles(0, 0, 30)
+        canvas.fillCircle(0, 0, 30)
         laserStart = self.centeredBounds()
         if laserEndpoint
           5.times ->
