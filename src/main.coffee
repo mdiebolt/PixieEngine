@@ -1,6 +1,6 @@
 window.engine = Engine
   canvas: $("canvas").powerCanvas()
-  fps: 60
+  FPS: 60
 
 block = 
   color: "#CB8"
