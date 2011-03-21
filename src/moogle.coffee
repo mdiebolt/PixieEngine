@@ -71,14 +71,12 @@ Moogle = (I) ->
         if laserEndpoint
           5.times ->
             canvas.strokeColor laserColors.rand()
-            canvas.drawLine(laserStart.x, laserStart.y, laserEndpoint.x, laserEndpoint.y, 2)
-        
-        if animationsLoaded 
-          I.animations.draw(canvas, 15, 260)
+            canvas.drawLine(laserStart.x, laserStart.y, laserEndpoint.x, laserEndpoint.y, 2)        
+
+        I.animations.draw(canvas, 15, 260)
             
       update: ->
-        if animationsLoaded
-          I.animations.update()
+        I.animations.update()
       
         if engine.collides(self.bounds(0, 1))
           falling = false
