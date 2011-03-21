@@ -38,9 +38,9 @@ Moogle = (I) ->
         
       # Move around based on input
       if keydown.d
-        I.velocity.x += 2
+        I.velocity = Point(4, 0)
       if keydown.a
-        I.velocity.x -= 2
+        I.velocity = Point(-4, 0)
       unless keydown.a || keydown.d
         I.velocity.x = 0
       unless keydown.w
@@ -50,8 +50,6 @@ Moogle = (I) ->
         
       if I.velocity.x.sign()
         lastDirection = I.velocity.x.sign() 
-        
-      I.velocity.x = I.velocity.x.clamp(-8, 8)
         
   physics = PHYSICS.platform
   
