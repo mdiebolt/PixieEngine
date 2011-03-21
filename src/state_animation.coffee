@@ -45,5 +45,5 @@
       
     return proxy
     
-  window.Animation.fromPixieId = fromPixieId
+  window.StateAnimation.fromPixieId = fromPixieId
 )()
