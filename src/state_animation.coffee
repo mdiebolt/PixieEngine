@@ -15,7 +15,8 @@
       draw: (canvas, x, y) ->
         spriteLookup[currentSprite].draw(canvas, x, y)
                     
-      update: -> advanceFrame()
+      update: -> 
+        advanceFrame()
             
       active: (name) ->
         if (name != undefined)
