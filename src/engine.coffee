@@ -107,10 +107,7 @@
             nearestHit = hit
             
         nearestHit
-        
-      rewind: () ->
-        
-        
+                
       saveState: () ->
         savedState = objects.map (object) ->
           $.extend({}, object.I)
@@ -134,14 +131,9 @@
         clearInterval(intervalId)
         intervalId = null
         
-      play: ->
-        paused = false
-        
-      pause: ->
-        paused = true
-        
-      paused: ->
-        paused
+      play: -> paused = false
+      pause: -> paused = true
+      paused: -> paused
         
       setFramerate: (newFPS) ->
         FPS = newFPS
