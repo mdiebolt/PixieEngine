@@ -75,8 +75,7 @@ Moogle = (I) ->
             canvas.drawLine(laserStart.x, laserStart.y, laserEndpoint.x, laserEndpoint.y, 2)
             
       update: ->
-        if engine.collides(self.bounds(0, 1), 'ladder')
-          log 'ladder!'
+        if engine.collides(self.bounds(0, 1))
           falling = false
         else
           falling = true
