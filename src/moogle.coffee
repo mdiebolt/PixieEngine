@@ -75,6 +75,7 @@ Moogle = (I) ->
             
       update: ->
         if engine.collides(self.bounds(0, 1), 'ladder')
+          log 'ladder!'
           falling = false
         else
           falling = true
