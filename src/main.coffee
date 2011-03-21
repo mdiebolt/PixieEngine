@@ -8,16 +8,7 @@ block =
   height: 32
   solid: true
     
-20.times (i) ->
-  engine.add $.extend(
-    x: 32 * i
-    y: 32 * 14
-  , block)
-    
-engine.add
-  class: "Moogle"
-  x: 320
-  y: 240
+engine.loadState(Local.get("level"))
   
 engine.start()
 
