@@ -31,18 +31,18 @@ Moogle = (I) ->
         I.velocity.y += GRAVITY.y
       else
 
-        if keydown.up
+        if keydown.w
           jumping = true
           I.velocity.y = -7 * GRAVITY.y - 2
         
       # Move around based on input
-      if keydown.right
+      if keydown.d
         I.velocity.x += 2
-      if keydown.left
+      if keydown.a
         I.velocity.x -= 2
-      unless keydown.left || keydown.right
+      unless keydown.a || keydown.d
         I.velocity.x = 0
-      unless keydown.up
+      unless keydown.w
         jumping = false
         
       shooting = keydown.space
