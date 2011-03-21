@@ -1,22 +1,25 @@
-(->
+(() ->
   StateAnimation = (data) ->  
     spriteLookup = {}
     activeAnimation = data.animations[0]
-    currentSprite = activeAnimation.frames[0]
+    currentSprite = data.animations[0].frames[0]
     
-    advanceFrame = ->
-      frames = activeAnimation.frames
+    advanceFrame = (animation) ->
+      frames = animation.frames
       currentSprite = frames[(frames.indexOf(currentSprite) + 1) % frames.length]
  
-    data.tileset.each (animationFrame, i) ->
-      spriteLookup[i] = Sprite.fromURL(animationFrame.src)
+    data.tileset.each (spriteData, i) ->
+      spriteLookup[i] = Sprite.fromURL(spriteData.src)
     
     $.extend data,
+      currentSprite: -> return currentSprite
       draw: (canvas, x, y) ->
-        spriteLookup[currentSprite].draw(canvas, x, y)
+        canvas.withTransform Matrix.translation(x, y), () ->
+          spriteLookup[currentSprite].draw(canvas, 0, 0)
+          
+      frames: -> return activeAnimation.frames
                     
-      update: -> 
-        advanceFrame()
+      update: -> return advanceFrame(activeAnimation)
             
       active: (name) ->
         if (name != undefined)
