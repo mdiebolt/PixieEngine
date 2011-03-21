@@ -1,4 +1,4 @@
-(() ->
+( ->
   StateAnimation = (data) ->  
     spriteLookup = {}
     activeAnimation = data.animations[0]
