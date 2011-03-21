@@ -81,16 +81,7 @@
         
       eachObject: (iterator) ->
         objects.each iterator
-        
-      collides: (bounds, selector) ->            
-        objects.inject [], (collidingObjects, object) ->
-          if (selector && object.I.class == selector)      
-            if object.solid() && object.collides(bounds)
-              collidingObjects.push(object)
-          else
-            if object.solid() && object.collides(bounds)
-              collidingObjects.push(object)          
-         
+                 
       rayCollides: (source, direction) ->
         hits = objects.map (object) ->
           hit = object.solid() && Collision.rayRectangle(source, direction, object.centeredBounds())
