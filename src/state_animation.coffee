@@ -8,8 +8,8 @@
       frames = activeAnimation.frames
       currentSprite = frames[(frames.indexOf(currentSprite) + 1) % frames.length]
  
-    data.tileset.each (spriteData, i) ->
-      spriteLookup[i] = Sprite.fromURL(spriteData.src)
+    data.tileset.each (animationFrame, i) ->
+      spriteLookup[i] = Sprite.fromURL(animationFrame.src)
     
     $.extend data,
       currentSprite: -> return currentSprite
