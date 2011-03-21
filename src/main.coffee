@@ -1,3 +1,5 @@
+Game.setFramerate(60)
+ 
 window.engine = Engine
   canvas: $("canvas").powerCanvas()
 
