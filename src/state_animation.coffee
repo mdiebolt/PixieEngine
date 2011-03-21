@@ -33,7 +33,6 @@
     proxy =
       active: $.noop
       draw: $.noop
-      update: $.noop
       
     $.getJSON url, (data) ->
       $.extend(proxy, StateAnimation(data))
