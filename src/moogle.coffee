@@ -1,7 +1,7 @@
 Moogle = (I) ->
   I ||= {}
   
-  GRAVITY = Point(0, 2)
+  GRAVITY = Point(0, 1)
   
   $.reverseMerge I,
     color: "blue"
