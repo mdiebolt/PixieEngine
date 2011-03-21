@@ -21,7 +21,7 @@
   
     update = ->
       objects = objects.select (object) ->
-        object.update()
+        object?.update()
         
       objects = objects.concat(queuedObjects)
       queuedObjects = []
