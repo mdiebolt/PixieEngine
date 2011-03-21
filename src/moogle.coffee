@@ -77,7 +77,8 @@ Moogle = (I) ->
         animation.draw(canvas, 15, 260)
             
       update: ->
-        animation.update()
+        if I.age % 5 == 0
+          animation.update()
       
         if engine.collides(self.bounds(0, 1))
           falling = false
