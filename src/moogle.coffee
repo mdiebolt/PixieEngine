@@ -33,7 +33,7 @@ Moogle = (I) ->
 
         if keydown.w
           jumping = true
-          I.velocity.y = -3 * GRAVITY.y - 2.1
+          I.velocity.y = -10 * GRAVITY.y - 2.1
         
       # Move around based on input
       if keydown.d
