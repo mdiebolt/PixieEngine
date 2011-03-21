@@ -8,14 +8,14 @@
       frames = activeAnimation.frames
       currentSprite = frames[(frames.indexOf(currentSprite) + 1) % frames.length]
  
-    data.tileset.each (animationFrame, i) ->
-      spriteLookup[i] = Sprite.fromURL(animationFrame.src)
+    data.tileset.each (spriteData, i) ->
+      spriteLookup[i] = Sprite.fromURL(spriteData.src) 
     
     $.extend data,
       draw: (canvas, x, y) ->
         spriteLookup[currentSprite].draw(canvas, x, y)
                     
-      update: -> advanceFrame()
+      update: -> return advanceFrame()
             
       active: (name) ->
         if (name != undefined)
@@ -23,6 +23,8 @@
             currentSprite = data.animations[name].frames[0] 
         else
           return activeAnimation
+          
+    return data
 
   window.StateAnimation = (name, callback) ->
     fromPixieId(App.Animations[name], callback)
@@ -36,7 +38,7 @@
       
     $.getJSON url, (data) ->
       $.extend(proxy, StateAnimation(data))
-      
+            
       callback proxy
       
     return proxy
