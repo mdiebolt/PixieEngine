@@ -28,7 +28,7 @@
         else
           return activeAnimation
 
-  window.Animation = (name, callback) ->
+  window.StateAnimation = (name, callback) ->
     fromPixieId(App.Animations[name], callback)
  
   fromPixieId = (id, callback) ->
