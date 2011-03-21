@@ -81,10 +81,7 @@ Moogle = (I) ->
           falling = true
 
         physics()
-
-        I.velocity.x.abs().times ->
           
-
         #TODO Reduct the # of calls to collides
         I.velocity.x.abs().times ->
           if !engine.collides(self.bounds(I.velocity.x.sign(), 0))
