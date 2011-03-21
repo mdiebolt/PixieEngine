@@ -12,12 +12,8 @@
       spriteLookup[i] = Sprite.fromURL(animationFrame.src)
     
     $.extend data,
-      currentSprite: -> return currentSprite
       draw: (canvas, x, y) ->
-        canvas.withTransform Matrix.translation(x, y), () ->
-          spriteLookup[currentSprite].draw(canvas, 0, 0)
-          
-      frames: -> return activeAnimation.frames
+        spriteLookup[currentSprite].draw(canvas, x, y)
                     
       update: -> return advanceFrame()
             
