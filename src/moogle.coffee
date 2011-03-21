@@ -7,7 +7,6 @@ Moogle = (I) ->
     animations: StateAnimation.fromPixieId 44, $.noop
     color: "blue"
     speed: 6
-    acceleration: Point(0, 0)
     solid: false
     width: 16
     height: 48
@@ -15,7 +14,6 @@ Moogle = (I) ->
     excludedModules: ["Movable"]
 
   # Cast acceleration and velocity to points
-  I.acceleration = Point(I.acceleration.x, I.acceleration.y)
   I.velocity = Point(I.velocity.x, I.velocity.y)
 
   jumping = false
