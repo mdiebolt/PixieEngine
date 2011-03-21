@@ -112,19 +112,19 @@ Moogle = (I) ->
           if laserEndpoint
             engine.add
               class: "Emitter"
-              duration: 3
+              duration: 10
               sprite: Sprite.EMPTY
               velocity: Point(0, 0)
               particleCount: 2
-              batchSize: 5
+              batchSize: 1
               x: laserEndpoint.x
               y: laserEndpoint.y
               generator:
                 color: "rgba(255, 0, 255, 0.7)"
-                duration: 2
+                duration: 20
                 height: (n) ->
                   particleSizes.wrap(n)
-                maxSpeed: 5
+                maxSpeed: 10
                 velocity: (n) ->
                   Point.fromAngle(Random.angle()).scale(rand(5) + 1)
                 width: (n) ->
