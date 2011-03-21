@@ -31,7 +31,6 @@ Moogle = (I) ->
       else if falling
         I.velocity.y += GRAVITY.y
       else
-
         if keydown.w
           jumping = true
           I.velocity.y = -10 * GRAVITY.y - 2.1
