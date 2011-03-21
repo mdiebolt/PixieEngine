@@ -2,10 +2,10 @@
   StateAnimation = (data) ->  
     spriteLookup = {}
     activeAnimation = data.animations[0]
-    currentSprite = data.animations[0].frames[0]
+    currentSprite = activeAnimation.frames[0]
     
-    advanceFrame = (animation) ->
-      frames = animation.frames
+    advanceFrame = ->
+      frames = activeAnimation.frames
       currentSprite = frames[(frames.indexOf(currentSprite) + 1) % frames.length]
  
     data.tileset.each (spriteData, i) ->
@@ -19,7 +19,7 @@
           
       frames: -> return activeAnimation.frames
                     
-      update: -> return advanceFrame(activeAnimation)
+      update: -> return advanceFrame()
             
       active: (name) ->
         if (name != undefined)
