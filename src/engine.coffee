@@ -84,8 +84,8 @@
         
       collides: (bounds, selector) ->            
         objects.inject [], (collidingObjects, object) ->
-          if (selector && object.I[selector])      
-            if object.solid() && object.collides(bounds)
+          if selector    
+            if object.solid() && object.collides(bounds) && object.I[selector] 
               collidingObjects.push(object)
           else
             if object.solid() && object.collides(bounds)
