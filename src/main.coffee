@@ -1,7 +1,6 @@
-Game.setFramerate(60)
- 
 window.engine = Engine
   canvas: $("canvas").powerCanvas()
+  fps: 60
 
 block = 
   color: "#CB8"
