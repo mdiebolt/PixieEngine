@@ -88,8 +88,8 @@
           #  if object.solid() && object.collides(bounds) && object.I[selector] 
           #    collidingObjects.push(object)
           #else
-            if object.solid() && object.collides(bounds)
-              collidingObjects.push(object) 
+          if object.solid() && object.collides(bounds)
+            collidingObjects.push(object) 
      
           collidingObjects   
            
