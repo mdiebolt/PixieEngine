@@ -134,10 +134,5 @@
       play: -> paused = false
       pause: -> paused = true
       paused: -> paused
-        
-      setFramerate: (newFPS) ->
-        FPS = newFPS
-        self.stop()
-        self.start()
 )(jQuery)
 
