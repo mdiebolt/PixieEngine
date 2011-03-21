@@ -1,4 +1,4 @@
-(->
+(() ->
   StateAnimation = (data) ->  
     spriteLookup = {}
     activeAnimation = data.animations[0]
@@ -33,6 +33,7 @@
     proxy =
       active: $.noop
       draw: $.noop
+      update: $.noop
       
     $.getJSON url, (data) ->
       $.extend(proxy, StateAnimation(data))
