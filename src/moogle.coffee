@@ -26,7 +26,7 @@ Moogle = (I) ->
   PHYSICS =
     platform: () ->
       if jumping
-        I.velocity.y += GRAVITY.scale(0.5).y
+        I.velocity.y += GRAVITY.scale(1).y
       else if falling
         I.velocity.y += GRAVITY.y
       else
