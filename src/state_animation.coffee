@@ -15,7 +15,7 @@
       draw: (canvas, x, y) ->
         spriteLookup[currentSprite].draw(canvas, x, y)
                     
-      update: -> return advanceFrame()
+      update: -> advanceFrame()
             
       active: (name) ->
         if (name != undefined)
@@ -33,6 +33,7 @@
     proxy =
       active: $.noop
       draw: $.noop
+      update: $.noop
       
     $.getJSON url, (data) ->
       $.extend(proxy, StateAnimation(data))
