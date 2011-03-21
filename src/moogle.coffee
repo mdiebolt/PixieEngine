@@ -67,6 +67,7 @@ Moogle = (I) ->
   self = GameObject(I).extend
     before:
       draw: (canvas) ->
+        canvas.fillColor Color("Fuzzy Wuzzy Brown")
         laserStart = self.centeredBounds()
         if laserEndpoint
           5.times ->
