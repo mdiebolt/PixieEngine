@@ -89,7 +89,9 @@
               collidingObjects.push(object)
           else
             if object.solid() && object.collides(bounds)
-              collidingObjects.push(object)          
+              collidingObjects.push(object) 
+     
+          collidingObjects       
          
       rayCollides: (source, direction) ->
         hits = objects.map (object) ->
