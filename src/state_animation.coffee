@@ -39,7 +39,7 @@
       draw: $.noop
       
     $.getJSON url, (data) ->
-      $.extend(proxy, Animation(data))
+      $.extend(proxy, StateAnimation(data))
       
       callback proxy
       
