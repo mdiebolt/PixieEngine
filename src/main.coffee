@@ -48,11 +48,11 @@ $(document).bind "keydown", "esc", () ->
   else
     engine.play()
 
-$(document).bind "keydown", "f3", () ->
-  savedState = engine.saveState()
+$(document).bind "keydown", "f3 [", () ->
+  Local.set("level", engine.saveState())
   
-$(document).bind "keydown", "f4", () ->
-  engine.loadState(savedState)
+$(document).bind "keydown", "f4 ]", () ->
+  engine.loadState(Local.get("level"))
   
 $(document).bind "keydown", "f5", () ->
   engine.reload()
