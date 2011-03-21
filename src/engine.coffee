@@ -82,9 +82,11 @@
       eachObject: (iterator) ->
         objects.each iterator
         
-      collides: (bounds) ->
+      collides: (bounds, selector) ->
+              
         objects.inject false, (collided, object) ->
-          collided || (object.solid() && object.collides(bounds))
+          if selector && object.I.class == selector
+            collided || (object.solid() && object.collides(bounds))
           
       rayCollides: (source, direction) ->
         hits = objects.map (object) ->
