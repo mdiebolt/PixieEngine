@@ -84,9 +84,10 @@
         
       collides: (bounds, selector) ->
               
-        objects.inject false, (collided, object) ->
+        objects.inject [], (collidingObjects, object) ->
           if selector && object.I.class == selector
-            collided || (object.solid() && object.collides(bounds))
+            if object.solid() && object.collides(bounds)
+              collidingObjects.push(object)
           
       rayCollides: (source, direction) ->
         hits = objects.map (object) ->
