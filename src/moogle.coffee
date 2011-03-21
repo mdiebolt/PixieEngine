@@ -26,14 +26,14 @@ Moogle = (I) ->
   PHYSICS =
     platform: () ->
       if jumping
-        I.velocity.y += GRAVITY.scale(1).y
+        I.velocity.y += GRAVITY.scale(0.5).y
       else if falling
         I.velocity.y += GRAVITY.y
       else
 
         if keydown.w
           jumping = true
-          I.velocity.y = -7 * GRAVITY.y - 2
+          I.velocity.y = -10 * GRAVITY.y - 2
         
       # Move around based on input
       if keydown.d
