@@ -4,7 +4,6 @@ Moogle = (I) ->
   GRAVITY = Point(0, 1)
   
   $.reverseMerge I,
-    animations: StateAnimation.fromPixieId 44
     color: "blue"
     speed: 6
     solid: false
@@ -12,6 +11,9 @@ Moogle = (I) ->
     height: 48
     velocity: Point(0, 0)
     excludedModules: ["Movable"]
+
+  animation = StateAnimation.fromPixieId 44, ->
+    $.noop
 
   # Cast acceleration and velocity to points
   I.velocity = Point(I.velocity.x, I.velocity.y)
@@ -72,10 +74,10 @@ Moogle = (I) ->
             canvas.strokeColor laserColors.rand()
             canvas.drawLine(laserStart.x, laserStart.y, laserEndpoint.x, laserEndpoint.y, 2)        
 
-        I.animations.draw(canvas, 15, 260)
+        animation.draw(canvas, 15, 260)
             
       update: ->
-        I.animations.update()
+        animation.update()
       
         if engine.collides(self.bounds(0, 1))
           falling = false
