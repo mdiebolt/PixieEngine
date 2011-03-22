@@ -246,32 +246,27 @@ test "Animation should set proper frame", ->
     animation.update()
       
   equals animation.currentSprite(), animation.frames().first(), "Animation should loop after it reaches the end"
- 
-asyncTest "Animation should be on correct frame after transition is called", ->
-  animation = StateAnimation.fromPixieId 45
-  
-  milliseconds = 100
-  
-  setTimeout ->
-    animation.transition("Stand")
 
-    equals animation.active().name, "Stand", "Animation should be in stand state after transition is called"
-    equals animation.active().frames[0], 0, "Animation should be on first frame after transition"
-
-    start()
-  , milliseconds
+test "Animation should be on correct frame after transition is called", ->
+  window.completeFired = false
+  animation = StateAnimation(animationData)
   
-asyncTest "Animation should trigger complete event once it reaches the end of the animation cycle", ->
-  animation = StateAnimation.fromPixieId 45
+  animation.transition("Stand")
   
-  milliseconds = 100
+  equals animation.active().name, "Stand", "Animation should be in stand state after transition is called"
+  equals animation.active().frames.first(), 0, "Animation should be on first frame after transition"
   
-  setTimeout ->
-    animation.transition("Stand")
+test "Animation should fire Complete event after updating past the last frame", ->
+  window.completeFired = false
+  
+  gameObj = GameObject()
+  gameObj.bind "Complete" ->
+    window.completeFired = true  
 
-    equals animation.active().name, "Stand", "Animation should be in stand state after transition is called"
-    equals animation.active().frames[0], 0, "Animation should be on first frame after transition"
-
-    start()
-  , milliseconds
+  animation = StateAnimation(animationData, gameObj)
+  
+  (animation.frames().length - 1).times ->
+    animation.update()
+    
+  ok(window.completeFired, "Complete event fired")
   
