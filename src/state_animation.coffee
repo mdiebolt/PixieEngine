@@ -22,6 +22,10 @@
         if newState
           data.animations.each (animation) ->
             activeAnimation = animation if animation.name == newState
+        else
+          if currentSprite == frames[frames.length - 1]
+            self.trigger("Complete")
+          
                     
       update: -> return advanceFrame()
             
