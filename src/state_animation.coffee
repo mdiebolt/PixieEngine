@@ -20,7 +20,8 @@
        
       transition: (newState) ->
         if newState
-          data.animations[newState]
+          data.animations.each (animation) ->
+            activeAnimation = animation if animation[newState]
                     
       update: -> return advanceFrame()
             
