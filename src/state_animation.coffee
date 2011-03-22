@@ -2,12 +2,12 @@
   StateAnimation = (data, object) ->  
     spriteLookup = {}
     activeAnimation = data.animations[0]
-    currentSprite = activeAnimation.frames[0]
+    currentFrameIndex = activeAnimation.frames[0]
     
     advanceFrame = ->
       frames = activeAnimation.frames
        
-      if currentSprite == frames.last() 
+      if currentFrameIndex == frames.last() 
         object?.trigger("Complete") 
         
         if activeAnimation.complete
@@ -15,18 +15,18 @@
             if animation.name == activeAnimation.complete
               activeAnimation = animation
 
-      currentSprite = activeAnimation.frames[(frames.indexOf(currentSprite) + 1) % frames.length]
+      currentFrameIndex = activeAnimation.frames[(frames.indexOf(currentFrameIndex) + 1) % frames.length]
  
     data.tileset.each (spriteData, i) ->
       spriteLookup[i] = Sprite.fromURL(spriteData.src) 
     
     $.extend data,
       # TODO these two methods are only used in testing. Find a better way to access them in the tests
-      currentSprite: -> currentSprite
+      currentFrameIndex: -> currentFrameIndex
       frames: -> activeAnimation.frames
       
       draw: (canvas, x, y) ->
-        spriteLookup[currentSprite].draw(canvas, x, y)
+        spriteLookup[currentFrameIndex].draw(canvas, x, y)
        
       transition: (newState) ->
         if newState
@@ -38,7 +38,7 @@
       active: (name) ->
         if (name != undefined)
           if data.animations[name]
-            currentSprite = data.animations[name].frames[0] 
+            currentFrameIndex = data.animations[name].frames[0] 
         else
           return activeAnimation
 
