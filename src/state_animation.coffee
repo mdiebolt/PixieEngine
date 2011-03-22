@@ -36,8 +36,8 @@
         else
           return activeAnimation
 
-  window.StateAnimation = (name, callback) ->
-    fromPixieId(App.Animations[name], callback)
+  window.StateAnimation = (data) ->
+    StateAnimation(data)
  
   fromPixieId = (id, callback) ->
     url = "http://pixie.strd6.com/s3/animations/#{id}/data.json"
