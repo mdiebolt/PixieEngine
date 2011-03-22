@@ -264,7 +264,7 @@ test "Animation should fire Complete event after updating past the last frame", 
   
   animation = StateAnimation(animationData, gameObj)
   
-  (animation.frames().length - 1).times ->
+  (animation.frames().length).times ->
     animation.update()
     
   ok window.completeFired, "Complete event fired"
