@@ -1,7 +1,7 @@
 asyncTest "Animation should set proper frame", ->
   animation = StateAnimation.fromPixieId 45
   
-  milliseconds = 300
+  milliseconds = 100
   
   setTimeout ->
     equals animation.currentSprite(), animation.frames()[0], "Animation should default to initial sprite"
@@ -14,6 +14,20 @@ asyncTest "Animation should set proper frame", ->
       animation.update()
       
     equals animation.currentSprite(), animation.frames()[0], "Animation should loop after it reaches the end"
+
+    start()
+  , milliseconds
+  
+asyncTest "Animation should be on correct frame after transition is called", ->
+  animation = StateAnimation.fromPixieId 45
+  
+  milliseconds = 100
+  
+  setTimeout ->
+    animation.transition("Run")
+
+    equals animation.active(), "Run", "Animation should be in run state after transition is called"
+    equals animation.frames[0], 0 "Animation should be on first frame after transition"
 
     start()
   , milliseconds
