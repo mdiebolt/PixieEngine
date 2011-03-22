@@ -14,12 +14,8 @@
           data.animations.each (animation) ->
             if animation.name == activeAnimation.complete
               activeAnimation = animation
-              currentSprite = activeAnimation.frames.first()
-            else
-              warn "Could not find state to transition to"
-              
-        else
-          currentSprite = frames[(frames.indexOf(currentSprite) + 1) % frames.length]
+
+      currentSprite = frames[(frames.indexOf(currentSprite) + 1) % frames.length]
  
     data.tileset.each (spriteData, i) ->
       spriteLookup[i] = Sprite.fromURL(spriteData.src) 
