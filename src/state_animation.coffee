@@ -21,7 +21,8 @@
       transition: (newState) ->
         if newState
           data.animations.each (animation) ->
-            activeAnimation = animation if animation[newState]
+            log animation
+            activeAnimation = animation if animation.name == newState
                     
       update: -> return advanceFrame()
             
