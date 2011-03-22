@@ -13,6 +13,8 @@
     
     $.extend data,
       currentSprite: -> currentSprite
+      frames: -> activeAnimation.frames
+      
       draw: (canvas, x, y) ->
         spriteLookup[currentSprite].draw(canvas, x, y)
                     
