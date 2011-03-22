@@ -7,9 +7,19 @@
     advanceFrame = ->
       frames = activeAnimation.frames
        
-      object?.trigger("Complete") if currentSprite == frames.last()
-
-      currentSprite = frames[(frames.indexOf(currentSprite) + 1) % frames.length]
+      if currentSprite == frames.last() 
+        object?.trigger("Complete") 
+        
+        if activeAnimation.complete
+          data.animations.each (animation) ->
+            if animation.name == activeAnimation.complete
+              activeAnimation = animation
+              currentSprite = activeAnimation.frames.first()
+            else
+              warn "Could not find state to transition to"
+              
+        else
+          currentSprite = frames[(frames.indexOf(currentSprite) + 1) % frames.length]
  
     data.tileset.each (spriteData, i) ->
       spriteLookup[i] = Sprite.fromURL(spriteData.src) 

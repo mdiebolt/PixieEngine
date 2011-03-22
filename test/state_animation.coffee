@@ -269,3 +269,16 @@ test "Animation should fire Complete event after updating past the last frame", 
     
   ok window.completeFired, "Complete event fired"
   
+test "Animation should advance to next state after last frame", ->
+  animation = StateAnimation(animationData)
+  
+  (animation.frames().length).times ->
+    animation.update()
+    
+  equals animation.active().name, "Stand", "After the bite cycle, we should end up in the stand state"
+  
+  50.times ->
+    animation.update()
+    
+  equals animation.active().name, "Stand", "The stand state loops so after any number of updates we should still be there"
+  
