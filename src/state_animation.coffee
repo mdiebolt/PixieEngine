@@ -12,8 +12,7 @@
         
         if activeAnimation.complete
           data.animations.each (animation) ->
-            if animation.name == activeAnimation.complete
-              activeAnimation = animation
+            activeAnimation = animation if animation.name == activeAnimation.complete
 
       currentFrameIndex = activeAnimation.frames[(frames.indexOf(currentFrameIndex) + 1) % frames.length]
  
@@ -27,13 +26,18 @@
       
       draw: (canvas, x, y) ->
         spriteLookup[currentFrameIndex].draw(canvas, x, y)
-       
+        
+      find: (name) ->
+        data.animations.each (animation) ->
+          if animation.name == name
+            return animation   
+        
       transition: (newState) ->
         if newState
           data.animations.each (animation) ->
             activeAnimation = animation if animation.name == newState
                           
-      update: -> return advanceFrame()
+      update: -> advanceFrame()
             
       active: (name) ->
         if (name != undefined)

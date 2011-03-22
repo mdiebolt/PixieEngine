@@ -283,3 +283,13 @@ test "Animation should advance to next state after last frame", ->
     
   equals animation.active().name, "Stand", "The stand state loops so after any number of updates we should still be there"
   
+test "Animation#find should retrieve the correct animation", ->
+  animations = StateAnimation(animationData)
+  
+  found = animations.find("Stand")
+  
+  equals found.name, "Stand"
+  equals found.complete, "Stand"
+  equals found.speed, "110"
+  equals found.frames, [0]
+  
