@@ -248,7 +248,6 @@ test "Animation should set proper frame", ->
   equals animation.currentSprite(), animation.frames().first(), "Animation should loop after it reaches the end"
 
 test "Animation should be on correct frame after transition is called", ->
-  window.completeFired = false
   animation = StateAnimation(animationData)
   
   animation.transition("Stand")
@@ -265,7 +264,7 @@ test "Animation should fire Complete event after updating past the last frame", 
   
   animation = StateAnimation(animationData, gameObj)
   
-  90.times ->
+  (animation.frames().length - 1).times ->
     animation.update()
     
   ok window.completeFired, "Complete event fired"
