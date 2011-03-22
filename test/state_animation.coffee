@@ -260,13 +260,13 @@ test "Animation should fire Complete event after updating past the last frame", 
   window.completeFired = false
   
   gameObj = GameObject()
-  gameObj.bind "Complete" ->
-    window.completeFired = true  
-
+  gameObj.bind "Complete", ->
+    window.completeFired = true
+  
   animation = StateAnimation(animationData, gameObj)
   
-  (animation.frames().length - 1).times ->
+  90.times ->
     animation.update()
     
-  ok(window.completeFired, "Complete event fired")
+  ok window.completeFired, "Complete event fired"
   
