@@ -219,7 +219,7 @@ animationData = `{
          "complete":"Stand",
          "events": {
            "0":["whiteParticles"],
-           "4":["blueParticles","greenParticles","redParticles"]
+           "4":["blueParticles","greenParticles","redParticles"],
            "5":["chompSound"]
          },
          "speed":"110",
@@ -237,16 +237,16 @@ animationData = `{
 test "Animation should set proper frame", ->
   animation = StateAnimation(animationData)
     
-  equals animation.currentSprite(), animation.frames().first(), "Animation should default to initial sprite"
+  equals animation.currentFrameIndex(), animation.frames().first(), "Animation should default to initial sprite"
     
   animation.update()
     
-  equals animation.currentSprite(), animation.frames()[1], "After an update the currentSprite has advanced"
+  equals animation.currentFrameIndex(), animation.frames()[1], "After an update the currentFrameIndex has advanced"
     
   (animation.frames().length - 1).times ->
     animation.update()
       
-  equals animation.currentSprite(), animation.frames().first(), "Animation should loop after it reaches the end"
+  equals animation.currentFrameIndex(), animation.frames().first(), "Animation should loop after it reaches the end"
 
 test "Animation should be on correct frame after transition is called", ->
   animation = StateAnimation(animationData)
