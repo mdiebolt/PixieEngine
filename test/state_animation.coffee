@@ -220,6 +220,7 @@ animationData = `{
          "events": {
            "0":["whiteParticles"],
            "4":["blueParticles","greenParticles","redParticles"]
+           "5":["chompSound"]
          },
          "speed":"110",
          "frames":[0,1,2,3,4,5,6,7]
