@@ -1,5 +1,5 @@
 (() ->
-  StateAnimation = (data) ->  
+  StateAnimation = (data, object) ->  
     spriteLookup = {}
     activeAnimation = data.animations[0]
     currentSprite = activeAnimation.frames[0]
@@ -24,9 +24,8 @@
             activeAnimation = animation if animation.name == newState
         else
           if currentSprite == frames[frames.length - 1]
-            self.trigger("Complete")
-          
-                    
+            object.trigger("Complete")
+                          
       update: -> return advanceFrame()
             
       active: (name) ->
