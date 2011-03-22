@@ -15,7 +15,7 @@
             if animation.name == activeAnimation.complete
               activeAnimation = animation
 
-      currentSprite = frames[(frames.indexOf(currentSprite) + 1) % frames.length]
+      currentSprite = activeAnimation.frames[(frames.indexOf(currentSprite) + 1) % frames.length]
  
     data.tileset.each (spriteData, i) ->
       spriteLookup[i] = Sprite.fromURL(spriteData.src) 

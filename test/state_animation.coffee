@@ -228,7 +228,7 @@ animationData = `{
          "name":"Stand",
          "complete":"Stand",
          "speed":"110",
-         "frames":[0]
+         "frames":[1]
       }
    ]
 }`
@@ -253,7 +253,7 @@ test "Animation should be on correct frame after transition is called", ->
   animation.transition("Stand")
   
   equals animation.active().name, "Stand", "Animation should be in stand state after transition is called"
-  equals animation.active().frames.first(), 0, "Animation should be on first frame after transition"
+  equals animation.active().frames.first(), 1, "Animation should be on first frame after transition"
   
 test "Animation should fire Complete event after updating past the last frame", ->
   window.completeFired = false
