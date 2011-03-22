@@ -24,9 +24,9 @@ asyncTest "Animation should be on correct frame after transition is called", ->
   milliseconds = 100
   
   setTimeout ->
-    animation.transition("Run")
+    animation.transition("Stand")
 
-    equals animation.active().name, "Run", "Animation should be in run state after transition is called"
+    equals animation.active().name, "Stand", "Animation should be in stand state after transition is called"
     equals animation.frames[0], 0, "Animation should be on first frame after transition"
 
     start()
