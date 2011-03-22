@@ -17,6 +17,8 @@
       
       draw: (canvas, x, y) ->
         spriteLookup[currentSprite].draw(canvas, x, y)
+       
+      transition: $.noop
                     
       update: -> return advanceFrame()
             
