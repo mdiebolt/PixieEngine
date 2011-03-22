@@ -288,8 +288,10 @@ test "Animation#find should retrieve the correct animation", ->
   
   found = animations.find("Stand")
   
+  log found
+  
   equals found.name, "Stand"
   equals found.complete, "Stand"
   equals found.speed, "110"
-  equals found.frames, [0]
+  equals found.frames[0], 1
   

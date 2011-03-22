@@ -28,9 +28,13 @@
         spriteLookup[currentFrameIndex].draw(canvas, x, y)
         
       find: (name) ->
+        result = null
+        
         data.animations.each (animation) ->
           if animation.name == name
-            return animation   
+            result = animation 
+        
+        return result  
         
       transition: (newState) ->
         if newState
