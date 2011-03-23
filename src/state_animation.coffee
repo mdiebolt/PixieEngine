@@ -44,12 +44,8 @@
           
         advanceFrame()
             
-      active: (name) ->
-        if (name != undefined)
-          if data.animations[name]
-            currentFrameIndex = data.animations[name].frames[0] 
-        else
-          return activeAnimation
+      active: (name) -> 
+        activeAnimation
 
   window.StateAnimation = (data, object) ->
     StateAnimation(data, object)
