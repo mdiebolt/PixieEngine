@@ -10,11 +10,18 @@
       if currentFrameIndex == frames.last() 
         object?.trigger("Complete") 
         
-        if activeAnimation.complete
-          data.animations.each (animation) ->
-            activeAnimation = animation if animation.name == activeAnimation.complete
+        if activeAnimation.complete 
+          activeAnimation = find(activeAnimation.complete) || activeAnimation        
 
       currentFrameIndex = activeAnimation.frames[(frames.indexOf(currentFrameIndex) + 1) % frames.length]
+
+    find = (name) ->
+      result = null
+      
+      data.animations.each (animation) ->
+        result = animation if animation.name == name
+                 
+      return result  
  
     data.tileset.each (spriteData, i) ->
       spriteLookup[i] = Sprite.fromURL(spriteData.src) 
@@ -26,22 +33,16 @@
       
       draw: (canvas, x, y) ->
         spriteLookup[currentFrameIndex].draw(canvas, x, y)
-        
-      find: (name) ->
-        result = null
-        
-        data.animations.each (animation) ->
-          if animation.name == name
-            result = animation 
-        
-        return result  
-        
+                
       transition: (newState) ->
-        if newState
-          data.animations.each (animation) ->
-            activeAnimation = animation if animation.name == newState
-                          
-      update: -> advanceFrame()
+        activeAnimation = find(newState) || activeAnimation
+                           
+      update: -> 
+        if activeAnimation.events && activeAnimation.events[currentFrameIndex] && object
+          activeAnimation.events[currentFrameIndex].each (event) ->
+            object.trigger(event)
+          
+        advanceFrame()
             
       active: (name) ->
         if (name != undefined)

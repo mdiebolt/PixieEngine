@@ -219,7 +219,7 @@ animationData = `{
          "complete":"Stand",
          "events": {
            "0":["whiteParticles"],
-           "4":["blueParticles","greenParticles","redParticles"],
+           "4":["blueParticles","greenParticles"],
            "5":["chompSound"]
          },
          "speed":"110",
@@ -278,20 +278,43 @@ test "Animation should advance to next state after last frame", ->
     
   equals animation.active().name, "Stand", "After the bite cycle, we should end up in the stand state"
   
-  50.times ->
-    animation.update()
+  50.times -> animation.update()
     
   equals animation.active().name, "Stand", "The stand state loops so after any number of updates we should still be there"
   
-test "Animation#find should retrieve the correct animation", ->
-  animations = StateAnimation(animationData)
+test "Animation should fire frame specific event on the proper frame", ->
+  window.whiteParticlesFired = window.blueParticlesFired = greenParticlesFired = chompSoundFired = false
   
-  found = animations.find("Stand")
+  gameObj = GameObject()
+  gameObj.bind "whiteParticles", ->
+    window.whiteParticlesFired = true
+    
+  gameObj.bind "blueParticles", ->
+    window.blueParticlesFired = true
+    
+  gameObj.bind "greenParticles", ->
+    window.greenParticlesFired = true
+    
+  gameObj.bind "chompSound", ->
+    window.chompSoundFired = true
   
-  log found
+  animation = StateAnimation(animationData, gameObj)
   
-  equals found.name, "Stand"
-  equals found.complete, "Stand"
-  equals found.speed, "110"
-  equals found.frames[0], 1
+  animation.update()
+  
+  ok window.whiteParticlesFired, "White particle effect fired"
+  
+  animation.update()
+  animation.update()
+  animation.update()
+  animation.update()
+  
+  ok window.blueParticlesFired, "Blue particle effect fired"
+  ok window.greenParticlesFired, "Green particle effect fired"
+  
+  animation.update()
+  
+  ok window.chompSoundFired, "Chomp sound effect fired"
+  
+  
   
