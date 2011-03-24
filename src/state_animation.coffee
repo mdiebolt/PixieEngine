@@ -17,8 +17,12 @@
       if I.currentFrameIndex == frames.last() 
         object?.trigger("Complete") 
         
-        if I.activeAnimation.complete 
-          I.activeAnimation = find(I.activeAnimation.complete) || I.activeAnimation        
+        nextState = I.activeAnimation.complete
+        
+        log I.activeAnimation
+        
+        if nextState
+          I.activeAnimation = find(nextState) || I.activeAnimation    
 
       I.currentFrameIndex = I.activeAnimation.frames[(frames.indexOf(I.currentFrameIndex) + 1) % frames.length]
 
