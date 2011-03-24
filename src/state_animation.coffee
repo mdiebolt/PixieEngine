@@ -38,8 +38,8 @@
         activeAnimation = find(newState) || activeAnimation
                            
       update: -> 
-        if activeAnimation.events && activeAnimation.events[currentFrameIndex] && object
-          activeAnimation.events[currentFrameIndex].each (event) ->
+        if activeAnimation.triggers && activeAnimation.triggers[currentFrameIndex] && object
+          activeAnimation.triggers[currentFrameIndex].each (event) ->
             object.trigger(event)
           
         advanceFrame()

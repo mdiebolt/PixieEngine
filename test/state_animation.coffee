@@ -430,11 +430,11 @@ test "Animation should advance to next state after last frame", ->
   (animation.frames().length).times ->
     animation.update()
     
-  equals animation.active().name, "Stand", "After the bite cycle, we should end up in the stand state"
+  equals animation.active().name, "Idle1", "After the bite cycle, we should end up in the Idle1 state"
   
   50.times -> animation.update()
     
-  equals animation.active().name, "Stand", "The stand state loops so after any number of updates we should still be there"
+  equals animation.active().name, "Idle1", "The idle1 state loops, so after any number of updates we should still be there"
   
 test "Animation should fire frame specific event on the proper frame", ->
   window.whiteParticlesFired = window.blueParticlesFired = greenParticlesFired = chompSoundFired = false
