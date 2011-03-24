@@ -351,37 +351,41 @@ animationData = `{
    ],
    "animations":[
       {
-         "name":"Bite",    
-         "complete":"Stand",
-         "speed":"110",    
+         "name":"Bite",
+         "complete":"Idle1",
+         "speed":"110",
          "triggers": {
            "0":["whiteParticles"],
-           "4":["blueParticles","greenParticles"]
+           "4":["blueParticles","greenParticles"],
            "5":["chompSound"]
-         },            
+         },
          "frames":[0,1,2,3,4,5,6,7]
       },
-      {
+      {   
+         "complete":"Idle1",
          "name":"Idle1",
          "speed":"110",
          "frames":[8,9,10,11]
       },
-      {
+      {     
+         "complete":"Idle1",
          "name":"Walk",
          "speed":"110",
          "frames":[12,13,14,15,16,17,18,19]
       },
       {
+         "complete":"Idle1"
          "name":"Idle2",
          "speed":"110",
          "frames":[20,21,22,23]
       },
-      {
+      {  
+         "complete":"Fly"
          "name":"Fly",
          "speed":"110",
          "frames":[24]
       }
-   ]
+   ]  
 }`
  
 test "Animation should set proper frame", ->
@@ -401,10 +405,10 @@ test "Animation should set proper frame", ->
 test "Animation should be on correct frame after transition is called", ->
   animation = StateAnimation(animationData)
   
-  animation.transition("Stand")
+  animation.transition("Idle1")
   
-  equals animation.active().name, "Stand", "Animation should be in stand state after transition is called"
-  equals animation.active().frames.first(), 1, "Animation should be on first frame after transition"
+  equals animation.active().name, "Idle1", "Animation should be in idle1 state after transition is called"
+  equals animation.active().frames.first(), 8, "Animation should be on first frame after transition"
   
 test "Animation should fire Complete event after updating past the last frame", ->
   window.completeFired = false
