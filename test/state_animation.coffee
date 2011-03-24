@@ -389,8 +389,9 @@ animationData = `{
 }`
  
 test "Animation should set proper frame", ->
-  animation = StateAnimation(animationData)
-    
+  animation = StateAnimation
+    data: animationData
+        
   equals animation.currentFrameIndex(), animation.frames().first(), "Animation should default to initial sprite"
     
   animation.update()
@@ -403,7 +404,8 @@ test "Animation should set proper frame", ->
   equals animation.currentFrameIndex(), animation.frames().first(), "Animation should loop after it reaches the end"
 
 test "Animation should be on correct frame after transition is called", ->
-  animation = StateAnimation(animationData)
+  animation = StateAnimation
+    data: animationData
   
   animation.transition("Idle1")
   
@@ -417,7 +419,7 @@ test "Animation should fire Complete event after updating past the last frame", 
   gameObj.bind "Complete", ->
     window.completeFired = true
   
-  animation = StateAnimation(animationData, gameObj)
+  animation = StateAnimation({data: animationData}, gameObj)
   
   (animation.frames().length).times ->
     animation.update()
@@ -425,7 +427,8 @@ test "Animation should fire Complete event after updating past the last frame", 
   ok window.completeFired, "Complete event fired"
   
 test "Animation should advance to next state after last frame", ->
-  animation = StateAnimation(animationData)
+  animation = StateAnimation
+    data: animationData
   
   (animation.frames().length).times ->
     animation.update()
@@ -452,7 +455,7 @@ test "Animation should fire frame specific event on the proper frame", ->
   gameObj.bind "chompSound", ->
     window.chompSoundFired = true
   
-  animation = StateAnimation(animationData, gameObj)
+  animation = StateAnimation({ data: animationData }, gameObj)
   
   animation.update()
   

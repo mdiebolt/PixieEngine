@@ -1,51 +1,58 @@
 (() ->
-  StateAnimation = (data, object) ->  
-    spriteLookup = {}
-    activeAnimation = data.animations[0]
-    currentFrameIndex = activeAnimation.frames[0]
+  StateAnimation = (I, object) ->  
+    I ||= {}
     
+    $.reverseMerge I,
+      data: {}
+      spriteLookup: {}
+      activeAnimation: []
+      currentFrameIndex: 0
+    
+    I.activeAnimation = I.data.animations[0]
+    I.currentFrameIndex = I.activeAnimation.frames[0]
+        
     advanceFrame = ->
-      frames = activeAnimation.frames
+      frames = I.activeAnimation.frames
        
-      if currentFrameIndex == frames.last() 
+      if I.currentFrameIndex == frames.last() 
         object?.trigger("Complete") 
         
-        if activeAnimation.complete 
-          activeAnimation = find(activeAnimation.complete) || activeAnimation        
+        if I.activeAnimation.complete 
+          I.activeAnimation = find(I.activeAnimation.complete) || I.activeAnimation        
 
-      currentFrameIndex = activeAnimation.frames[(frames.indexOf(currentFrameIndex) + 1) % frames.length]
+      I.currentFrameIndex = I.activeAnimation.frames[(frames.indexOf(I.currentFrameIndex) + 1) % frames.length]
 
     find = (name) ->
       result = null
       
-      data.animations.each (animation) ->
+      I.data.animations.each (animation) ->
         result = animation if animation.name == name
                  
       return result  
  
-    data.tileset.each (spriteData, i) ->
-      spriteLookup[i] = Sprite.fromURL(spriteData.src) 
+    I.data.tileset.each (spriteData, i) ->
+      I.spriteLookup[i] = Sprite.fromURL(spriteData.src) 
     
-    $.extend data,
+    $.extend I.data,
       # TODO these two methods are only used in testing. Find a better way to access them in the tests
-      currentFrameIndex: -> currentFrameIndex
-      frames: -> activeAnimation.frames
+      currentFrameIndex: -> I.currentFrameIndex
+      frames: -> I.activeAnimation.frames
       
       draw: (canvas, x, y) ->
-        spriteLookup[currentFrameIndex].draw(canvas, x, y)
+        I.spriteLookup[I.currentFrameIndex].draw(canvas, x, y)
                 
       transition: (newState) ->
-        activeAnimation = find(newState) || activeAnimation
+        I.activeAnimation = find(newState) || I.activeAnimation
                            
       update: -> 
-        if activeAnimation.triggers && activeAnimation.triggers[currentFrameIndex] && object
-          activeAnimation.triggers[currentFrameIndex].each (event) ->
+        if I.activeAnimation.triggers && I.activeAnimation.triggers[I.currentFrameIndex] && object
+          I.activeAnimation.triggers[I.currentFrameIndex].each (event) ->
             object.trigger(event)
           
         advanceFrame()
             
       active: (name) -> 
-        activeAnimation
+        I.activeAnimation
 
   window.StateAnimation = (data, object) ->
     StateAnimation(data, object)
