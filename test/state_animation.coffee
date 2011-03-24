@@ -374,13 +374,13 @@ animationData = `{
          "frames":[12,13,14,15,16,17,18,19]
       },
       {
-         "complete":"Idle1"
+         "complete":"Idle1",
          "name":"Idle2",
          "speed":"110",
          "frames":[20,21,22,23]
       },
       {  
-         "complete":"Fly"
+         "complete":"Fly",
          "name":"Fly",
          "speed":"110",
          "frames":[24]
