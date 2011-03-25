@@ -34,9 +34,6 @@ Animated = (I, self) ->
   I.data.tileset.each (spriteData, i) ->
     I.spriteLookup[i] = Sprite.fromURL(spriteData.src) 
   
-  # TODO these two methods are only used in testing. Find a better way to access them in the tests
-  frames: -> I.activeAnimation.frames
-  
   draw: (canvas, x, y) ->
     I.spriteLookup[I.currentFrameIndex].draw(canvas, x, y)
             

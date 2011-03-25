@@ -394,16 +394,16 @@ test "Animation should set proper frame", ->
 
   animation.include(Animated)
  
-  equals animation.I.currentFrameIndex, animation.frames().first(), "Animation should default to initial sprite"
+  equals animation.I.currentFrameIndex, animation.I.activeAnimation.frames.first(), "Animation should default to initial sprite"
     
   animation.update()
     
-  equals animation.I.currentFrameIndex, animation.frames()[1], "After an update the currentFrameIndex has advanced"
+  equals animation.I.currentFrameIndex, animation.I.activeAnimation.frames[1], "After an update the currentFrameIndex has advanced"
     
-  (animation.frames().length - 1).times ->
+  (animation.I.activeAnimation.frames.length - 1).times ->
     animation.update()
       
-  equals animation.I.currentFrameIndex, animation.frames().first(), "Animation should loop after it reaches the end"
+  equals animation.I.currentFrameIndex, animation.I.activeAnimation.frames.first(), "Animation should loop after it reaches the end"
 
 test "Animation should be on correct frame after transition is called", ->
   animation = GameObject
@@ -427,7 +427,7 @@ test "Animation should fire Complete event after updating past the last frame", 
   
   animation.include(Animated)
   
-  (animation.frames().length).times ->
+  (animation.I.activeAnimation.frames.length).times ->
     animation.update()
     
   ok window.completeFired, "Complete event fired"
@@ -438,7 +438,7 @@ test "Animation should advance to next state after last frame", ->
     
   animation.include(Animated)
   
-  (animation.frames().length).times ->
+  (animation.I.activeAnimation.frames.length).times ->
     animation.update()
     
   equals animation.I.activeAnimation.name, "Idle1", "After the bite cycle, we should end up in the Idle1 state"
