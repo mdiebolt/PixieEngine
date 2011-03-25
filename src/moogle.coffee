@@ -395,15 +395,13 @@ Moogle = (I) ->
   
   $.reverseMerge I,
     color: "blue"
+    data: animationData
     speed: 6
     solid: false
     width: 16
     height: 48
     velocity: Point(0, 0)
     excludedModules: ["Movable"]
-    
-  animation = StateAnimation
-    data: animationData
     
   # Cast acceleration and velocity to points
   I.velocity = Point(I.velocity.x, I.velocity.y)
@@ -413,7 +411,6 @@ Moogle = (I) ->
   lastDirection = 1
   shooting = false
   laserEndpoint = null
-  window.animationsLoaded = false
   
   PHYSICS =
     platform: () ->
@@ -463,13 +460,8 @@ Moogle = (I) ->
           5.times ->
             canvas.strokeColor laserColors.rand()
             canvas.drawLine(laserStart.x, laserStart.y, laserEndpoint.x, laserEndpoint.y, 2)        
-
-        animation.draw(canvas, 15, 260)
             
-      update: ->
-        if I.age % 5 == 0
-          animation.update()
-      
+      update: ->      
         if engine.collides(self.bounds(0, 1))
           falling = false
         else
@@ -554,6 +546,8 @@ Moogle = (I) ->
             if I.active
               I.active = false
               engine.queue(nextLevel)
-    
+
+  self.include(Animated)
+ 
   self
 
