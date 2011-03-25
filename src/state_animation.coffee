@@ -1,80 +1,55 @@
-(() ->
-  StateAnimation = (I, object) ->  
-    I ||= {}
-    
-    $.reverseMerge I,
-      data: {}
-      spriteLookup: {}
-      activeAnimation: []
-      currentFrameIndex: 0
-    
-    I.activeAnimation = I.data.animations[0]
-    I.currentFrameIndex = I.activeAnimation.frames[0]
-        
-    advanceFrame = ->
-      frames = I.activeAnimation.frames
-       
-      if I.currentFrameIndex == frames.last() 
-        object?.trigger("Complete") 
-        
-        nextState = I.activeAnimation.complete
-        
-        log I.activeAnimation
-        
-        if nextState
-          I.activeAnimation = find(nextState) || I.activeAnimation    
-
-      I.currentFrameIndex = I.activeAnimation.frames[(frames.indexOf(I.currentFrameIndex) + 1) % frames.length]
-
-    find = (name) ->
-      result = null
-      
-      I.data.animations.each (animation) ->
-        result = animation if animation.name == name
-                 
-      return result  
- 
-    I.data.tileset.each (spriteData, i) ->
-      I.spriteLookup[i] = Sprite.fromURL(spriteData.src) 
-    
-    $.extend I.data,
-      # TODO these two methods are only used in testing. Find a better way to access them in the tests
-      currentFrameIndex: -> I.currentFrameIndex
-      frames: -> I.activeAnimation.frames
-      
-      draw: (canvas, x, y) ->
-        I.spriteLookup[I.currentFrameIndex].draw(canvas, x, y)
-                
-      transition: (newState) ->
-        I.activeAnimation = find(newState) || I.activeAnimation
-                           
-      update: -> 
-        if I.activeAnimation.triggers && I.activeAnimation.triggers[I.currentFrameIndex] && object
-          I.activeAnimation.triggers[I.currentFrameIndex].each (event) ->
-            object.trigger(event)
-          
-        advanceFrame()
-            
-      active: (name) -> 
-        I.activeAnimation
-
-  window.StateAnimation = (data, object) ->
-    StateAnimation(data, object)
- 
-  fromPixieId = (id, callback) ->
-    url = "http://pixie.strd6.com/s3/animations/#{id}/data.json"
+StateAnimation = (I, object) ->  
+  I ||= {}
   
-    proxy =
-      active: $.noop
-      draw: $.noop
-      update: $.noop
+  $.reverseMerge I,
+    data: {}
+    spriteLookup: {}
+    activeAnimation: []
+    currentFrameIndex: 0
+  
+  I.activeAnimation = I.data.animations[0]
+  I.currentFrameIndex = I.activeAnimation.frames[0]
       
-    $.getJSON url, (data) ->
-      $.extend(proxy, StateAnimation(data))
+  advanceFrame = ->
+    frames = I.activeAnimation.frames
+     
+    if I.currentFrameIndex == frames.last() 
+      object?.trigger("Complete") 
       
-      callback proxy
+      nextState = I.activeAnimation.complete
       
-    return proxy
+      if nextState
+        I.activeAnimation = find(nextState) || I.activeAnimation    
+
+    I.currentFrameIndex = I.activeAnimation.frames[(frames.indexOf(I.currentFrameIndex) + 1) % frames.length]
+
+  find = (name) ->
+    result = null
     
-  window.StateAnimation.fromPixieId = fromPixieId
-)()
+    I.data.animations.each (animation) ->
+      result = animation if animation.name == name
+               
+    return result  
+
+  I.data.tileset.each (spriteData, i) ->
+    I.spriteLookup[i] = Sprite.fromURL(spriteData.src) 
+  
+  # TODO these two methods are only used in testing. Find a better way to access them in the tests
+  currentFrameIndex: -> I.currentFrameIndex
+  frames: -> I.activeAnimation.frames
+  
+  draw: (canvas, x, y) ->
+    I.spriteLookup[I.currentFrameIndex].draw(canvas, x, y)
+            
+  transition: (newState) ->
+    I.activeAnimation = find(newState) || I.activeAnimation
+                       
+  update: -> 
+    if I.activeAnimation.triggers && I.activeAnimation.triggers[I.currentFrameIndex] && object
+      I.activeAnimation.triggers[I.currentFrameIndex].each (event) ->
+        object.trigger(event)
+      
+    advanceFrame()
+        
+  active: (name) -> 
+    I.activeAnimation
