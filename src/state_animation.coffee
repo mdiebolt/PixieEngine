@@ -35,8 +35,12 @@ Animated = (I, self) ->
     I.spriteLookup[i] = Sprite.fromURL(spriteData.src) 
   
   draw: (canvas) ->
-    I.spriteLookup[I.currentFrameIndex].draw(canvas, I.x, I.y)
-            
+    canvas.withTransform self.transform(), ->
+      I.spriteLookup[I.currentFrameIndex].draw(canvas, I.x, I.y)
+      
+  transform: ->
+    Matrix.IDENTITY
+        
   transition: (newState) ->
     I.activeAnimation = find(newState) || I.activeAnimation
   
