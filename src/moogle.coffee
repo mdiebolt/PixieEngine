@@ -394,12 +394,11 @@ Moogle = (I) ->
   GRAVITY = Point(0, 1)
   
   $.reverseMerge I,
-    color: "blue"
     data: animationData
     speed: 6
     solid: false
-    width: 16
-    height: 48
+    width: 150
+    height: 189
     velocity: Point(0, 0)
     excludedModules: ["Movable"]
     
@@ -426,12 +425,19 @@ Moogle = (I) ->
       # Move around based on input
       if keydown.d
         I.velocity.x += 0.75
+        self.transition('Walk')
       if keydown.a
         I.velocity.x -= 0.75
+        self.transition('Walk')
       unless keydown.a || keydown.d
         I.velocity.x = 0
+        self.transition('Idle1')
       unless keydown.w
         jumping = false
+        
+
+      if keydown.space
+        self.transition('Bite')
         
       shooting = keydown.space
         
@@ -461,7 +467,7 @@ Moogle = (I) ->
             canvas.strokeColor laserColors.rand()
             canvas.drawLine(laserStart.x, laserStart.y, laserEndpoint.x, laserEndpoint.y, 2)        
             
-      update: ->      
+      update: ->            
         if engine.collides(self.bounds(0, 1))
           falling = false
         else
@@ -546,7 +552,10 @@ Moogle = (I) ->
             if I.active
               I.active = false
               engine.queue(nextLevel)
-
+    
+    transform: ->
+      if lastDirection >= 0 then Matrix.HORIZONTAL_FLIP else Matrix.HORIZONTAL_FLIP
+ 
   self.include(Animated)
  
   self
