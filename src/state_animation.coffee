@@ -34,8 +34,8 @@ Animated = (I, self) ->
   I.data.tileset.each (spriteData, i) ->
     I.spriteLookup[i] = Sprite.fromURL(spriteData.src) 
   
-  draw: (canvas, x, y) ->
-    I.spriteLookup[I.currentFrameIndex].draw(canvas, x, y)
+  draw: (canvas) ->
+    I.spriteLookup[I.currentFrameIndex].draw(canvas, I.x, I.y)
             
   transition: (newState) ->
     I.activeAnimation = find(newState) || I.activeAnimation
