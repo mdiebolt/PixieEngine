@@ -19,7 +19,9 @@ Animated = (I, self) ->
       nextState = I.activeAnimation.complete
       
       if nextState
-        I.activeAnimation = find(nextState) || I.activeAnimation    
+        I.activeAnimation = find(nextState) || I.activeAnimation
+        I.width = I.spriteLookup[I.activeAnimation.frames[0]].width
+        I.height = I.spriteLookup[I.activeAnimation.frames[0]].height 
 
     I.currentFrameIndex = I.activeAnimation.frames[(frames.indexOf(I.currentFrameIndex) + 1) % frames.length]
 
@@ -44,6 +46,9 @@ Animated = (I, self) ->
   transition: (newState) ->
     if newState != I.activeAnimation.name
       I.activeAnimation = find(newState) || I.activeAnimation
+      I.width = I.spriteLookup[I.activeAnimation.frames[0]].width
+      I.height = I.spriteLookup[I.activeAnimation.frames[0]].height 
+      log "width: #{I.width} height: #{I.height}"
   
   before:  
     update: -> 

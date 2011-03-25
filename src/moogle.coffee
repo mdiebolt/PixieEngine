@@ -554,7 +554,7 @@ Moogle = (I) ->
               engine.queue(nextLevel)
     
     transform: ->
-      if lastDirection >= 0 then Matrix.HORIZONTAL_FLIP else Matrix.HORIZONTAL_FLIP
+      if lastDirection >= 0 then Matrix.IDENTITY else Matrix.HORIZONTAL_FLIP
  
   self.include(Animated)
  
