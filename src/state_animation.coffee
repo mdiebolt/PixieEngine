@@ -42,7 +42,8 @@ Animated = (I, self) ->
       I.spriteLookup[I.currentFrameIndex].draw(canvas, I.x, I.y)
               
   transition: (newState) ->
-    I.activeAnimation = find(newState) || I.activeAnimation
+    if newState != I.activeAnimation.name
+      I.activeAnimation = find(newState) || I.activeAnimation
   
   before:  
     update: -> 
