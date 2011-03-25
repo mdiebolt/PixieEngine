@@ -413,8 +413,8 @@ test "Animation should be on correct frame after transition is called", ->
   
   animation.transition("Idle1")
   
-  equals animation.active().name, "Idle1", "Animation should be in idle1 state after transition is called"
-  equals animation.active().frames.first(), 8, "Animation should be on first frame after transition"
+  equals animation.I.activeAnimation.name, "Idle1", "Animation should be in idle1 state after transition is called"
+  equals animation.I.activeAnimation.frames.first(), 8, "Animation should be on first frame after transition"
   
 test "Animation should fire Complete event after updating past the last frame", ->
   window.completeFired = false
@@ -441,11 +441,11 @@ test "Animation should advance to next state after last frame", ->
   (animation.frames().length).times ->
     animation.update()
     
-  equals animation.active().name, "Idle1", "After the bite cycle, we should end up in the Idle1 state"
+  equals animation.I.activeAnimation.name, "Idle1", "After the bite cycle, we should end up in the Idle1 state"
   
   50.times -> animation.update()
     
-  equals animation.active().name, "Idle1", "The idle1 state loops, so after any number of updates we should still be there"
+  equals animation.I.activeAnimation.name, "Idle1", "The idle1 state loops, so after any number of updates we should still be there"
   
 test "Animation should fire frame specific event on the proper frame", ->
   window.whiteParticlesFired = window.blueParticlesFired = greenParticlesFired = chompSoundFired = false

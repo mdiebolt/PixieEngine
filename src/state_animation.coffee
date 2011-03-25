@@ -49,6 +49,4 @@ Animated = (I, self) ->
         self.trigger(event)
       
     advanceFrame()
-        
-  active: (name) -> 
-    I.activeAnimation
+
