@@ -35,7 +35,6 @@ Animated = (I, self) ->
     I.spriteLookup[i] = Sprite.fromURL(spriteData.src) 
   
   # TODO these two methods are only used in testing. Find a better way to access them in the tests
-  currentFrameIndex: -> I.currentFrameIndex
   frames: -> I.activeAnimation.frames
   
   draw: (canvas, x, y) ->

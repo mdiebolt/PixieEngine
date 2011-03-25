@@ -394,21 +394,21 @@ test "Animation should set proper frame", ->
 
   animation.include(Animated)
  
-  equals animation.currentFrameIndex(), animation.frames().first(), "Animation should default to initial sprite"
+  equals animation.I.currentFrameIndex, animation.frames().first(), "Animation should default to initial sprite"
     
   animation.update()
     
-  equals animation.currentFrameIndex(), animation.frames()[1], "After an update the currentFrameIndex has advanced"
+  equals animation.I.currentFrameIndex, animation.frames()[1], "After an update the currentFrameIndex has advanced"
     
   (animation.frames().length - 1).times ->
     animation.update()
       
-  equals animation.currentFrameIndex(), animation.frames().first(), "Animation should loop after it reaches the end"
+  equals animation.I.currentFrameIndex, animation.frames().first(), "Animation should loop after it reaches the end"
 
 test "Animation should be on correct frame after transition is called", ->
   animation = GameObject
     data: animationData
-  
+      
   animation.include(Animated)
   
   animation.transition("Idle1")
