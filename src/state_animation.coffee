@@ -39,11 +39,12 @@ Animated = (I, self) ->
             
   transition: (newState) ->
     I.activeAnimation = find(newState) || I.activeAnimation
-                       
-  update: -> 
-    if I.activeAnimation.triggers && I.activeAnimation.triggers[I.currentFrameIndex]
-      I.activeAnimation.triggers[I.currentFrameIndex].each (event) ->
-        self.trigger(event)
-      
-    advanceFrame()
+  
+  before:  
+    update: -> 
+      if I.activeAnimation.triggers && I.activeAnimation.triggers[I.currentFrameIndex]
+        I.activeAnimation.triggers[I.currentFrameIndex].each (event) ->
+          self.trigger(event)
+        
+      advanceFrame()
 
