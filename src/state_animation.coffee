@@ -1,4 +1,4 @@
-StateAnimation = (I, object) ->  
+Animated = (I, self) ->  
   I ||= {}
   
   $.reverseMerge I,
@@ -14,7 +14,7 @@ StateAnimation = (I, object) ->
     frames = I.activeAnimation.frames
      
     if I.currentFrameIndex == frames.last() 
-      object?.trigger("Complete") 
+      self.trigger("Complete") 
       
       nextState = I.activeAnimation.complete
       
@@ -45,9 +45,9 @@ StateAnimation = (I, object) ->
     I.activeAnimation = find(newState) || I.activeAnimation
                        
   update: -> 
-    if I.activeAnimation.triggers && I.activeAnimation.triggers[I.currentFrameIndex] && object
+    if I.activeAnimation.triggers && I.activeAnimation.triggers[I.currentFrameIndex]
       I.activeAnimation.triggers[I.currentFrameIndex].each (event) ->
-        object.trigger(event)
+        self.trigger(event)
       
     advanceFrame()
         

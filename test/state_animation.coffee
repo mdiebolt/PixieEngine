@@ -389,9 +389,11 @@ animationData = `{
 }`
  
 test "Animation should set proper frame", ->
-  animation = StateAnimation
+  animation = GameObject
     data: animationData
-        
+
+  animation.include(Animated)
+ 
   equals animation.currentFrameIndex(), animation.frames().first(), "Animation should default to initial sprite"
     
   animation.update()
@@ -404,8 +406,10 @@ test "Animation should set proper frame", ->
   equals animation.currentFrameIndex(), animation.frames().first(), "Animation should loop after it reaches the end"
 
 test "Animation should be on correct frame after transition is called", ->
-  animation = StateAnimation
+  animation = GameObject
     data: animationData
+  
+  animation.include(Animated)
   
   animation.transition("Idle1")
   
@@ -415,11 +419,13 @@ test "Animation should be on correct frame after transition is called", ->
 test "Animation should fire Complete event after updating past the last frame", ->
   window.completeFired = false
   
-  gameObj = GameObject()
-  gameObj.bind "Complete", ->
+  animation = GameObject
+    data: animationData
+    
+  animation.bind "Complete", ->
     window.completeFired = true
   
-  animation = StateAnimation({data: animationData}, gameObj)
+  animation.include(Animated)
   
   (animation.frames().length).times ->
     animation.update()
@@ -427,8 +433,10 @@ test "Animation should fire Complete event after updating past the last frame", 
   ok window.completeFired, "Complete event fired"
   
 test "Animation should advance to next state after last frame", ->
-  animation = StateAnimation
+  animation = GameObject
     data: animationData
+    
+  animation.include(Animated)
   
   (animation.frames().length).times ->
     animation.update()
@@ -442,20 +450,22 @@ test "Animation should advance to next state after last frame", ->
 test "Animation should fire frame specific event on the proper frame", ->
   window.whiteParticlesFired = window.blueParticlesFired = greenParticlesFired = chompSoundFired = false
   
-  gameObj = GameObject()
-  gameObj.bind "whiteParticles", ->
+  animation = GameObject
+    data: animationData
+  
+  animation.bind "whiteParticles", ->
     window.whiteParticlesFired = true
     
-  gameObj.bind "blueParticles", ->
+  animation.bind "blueParticles", ->
     window.blueParticlesFired = true
     
-  gameObj.bind "greenParticles", ->
+  animation.bind "greenParticles", ->
     window.greenParticlesFired = true
     
-  gameObj.bind "chompSound", ->
+  animation.bind "chompSound", ->
     window.chompSoundFired = true
   
-  animation = StateAnimation({ data: animationData }, gameObj)
+  animation.include(Animated)
   
   animation.update()
   
