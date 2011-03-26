@@ -396,78 +396,26 @@ Contrasaur = (I) ->
   
   $.reverseMerge I,
     data: animationData
-    solid: false
-    velocity: Point(0, 0)
-    excludedModules: ["Movable"]
-    
-  # Cast acceleration and velocity to points
-  I.velocity = Point(I.velocity.x, I.velocity.y)
-
-  jumping = false
-  falling = true
-  lastDirection = 1
-  
+      
   PHYSICS =
     platform: () ->
-      if jumping
-        I.velocity.y += GRAVITY.scale(0.6).y
-      else if falling
-        I.velocity.y += GRAVITY.y
-      else
-        if keydown.w
-          jumping = true
-          I.velocity.y = -10 * GRAVITY.y - 2.1
+      if keydown.b
+        self.transition("Bite")
+      if keydown.z
+        self.transition("Walk")
+      if keydown.x
+        self.transition("Walk")
         
-      # Move around based on input
-      if keydown.d
-        I.velocity.x += 0.75
-      if keydown.a
-        I.velocity.x -= 0.75
-      unless keydown.a || keydown.d
-        I.velocity.x = 0
-      unless keydown.w
-        jumping = false
-        
-      shooting = keydown.space
-        
-      if I.velocity.x.sign()
-        lastDirection = I.velocity.x.sign() 
-        
-      I.velocity.x = I.velocity.x.clamp(-8, 8)
-        
+      unless keydown.z || keydown.x || keydown.b
+        self.transition("Idle1")
+                
   physics = PHYSICS.platform
     
   self = GameObject(I).extend
     before:            
       update: ->      
-        if engine.collides(self.bounds(0, 1))
-          falling = false
-        else
-          falling = true
-
         physics()
           
-        #TODO Reduct the # of calls to collides
-        I.velocity.x.abs().times ->
-          if !engine.collides(self.bounds(I.velocity.x.sign(), 0))
-            I.x += I.velocity.x.sign()
-          else 
-            I.velocity.x = 0
-    
-        #TODO Reduct the # of calls to collides
-        I.velocity.y.abs().times ->
-          if !engine.collides(self.bounds(0, I.velocity.y.sign()))
-            I.y += I.velocity.y.sign()
-          else 
-            I.velocity.y = 0
-            jumping = false
-      
-        engine.eachObject (object) ->
-          if object.I.open && Collision.rectangular(I, object.bounds())
-            if I.active
-              I.active = false
-              engine.queue(nextLevel)
-
   self.include(Animated)
  
   self

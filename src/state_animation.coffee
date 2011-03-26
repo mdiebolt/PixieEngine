@@ -45,7 +45,7 @@ Animated = (I, self) ->
       I.spriteLookup[I.currentFrameIndex].draw(canvas, I.x, I.y)
               
   transition: (newState) ->
-    if newState != I.activeAnimation.name
+    if newState != I.activeAnimation.name && !I.activeAnimation.continuous
       I.activeAnimation = find(newState) || I.activeAnimation
       I.width = I.spriteLookup[I.activeAnimation.frames[0]].width
       I.height = I.spriteLookup[I.activeAnimation.frames[0]].height 
