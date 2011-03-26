@@ -6,6 +6,7 @@ Animated = (I, self) ->
     spriteLookup: {}
     activeAnimation: []
     currentFrameIndex: 0
+    lastUpdate: new Date().getTime()
   
   I.activeAnimation = I.data.animations[0]
   I.currentFrameIndex = I.activeAnimation.frames[0]
@@ -48,13 +49,18 @@ Animated = (I, self) ->
       I.activeAnimation = find(newState) || I.activeAnimation
       I.width = I.spriteLookup[I.activeAnimation.frames[0]].width
       I.height = I.spriteLookup[I.activeAnimation.frames[0]].height 
-      log "width: #{I.width} height: #{I.height}"
   
   before:  
     update: -> 
-      if I.activeAnimation.triggers && I.activeAnimation.triggers[I.currentFrameIndex]
-        I.activeAnimation.triggers[I.currentFrameIndex].each (event) ->
-          self.trigger(event)
-        
-      advanceFrame()
+      time = new Date().getTime()
+              
+      updateFrame = (time - I.lastUpdate) >= I.activeAnimation.speed
+      
+      if updateFrame
+        I.lastUpdate = time
+        if I.activeAnimation.triggers && I.activeAnimation.triggers[I.currentFrameIndex]
+          I.activeAnimation.triggers[I.currentFrameIndex].each (event) ->
+            self.trigger(event)
+          
+        advanceFrame()
 
