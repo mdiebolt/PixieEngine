@@ -412,10 +412,13 @@ test "Animation should be on correct frame after transition is called", ->
       
   animation.include(Animated)
   
-  animation.transition("Idle1")
+  # Bite cannot be interrupted. Hack to get to idle state
+  10.times -> animation.update()
   
-  equals animation.I.activeAnimation.name, "Idle1", "Animation should be in idle1 state after transition is called"
-  equals animation.I.activeAnimation.frames.first(), 8, "Animation should be on first frame after transition"
+  animation.transition("Idle2")
+  
+  equals animation.I.activeAnimation.name, "Idle2", "Animation should be in idle2 state after transition is called"
+  equals animation.I.activeAnimation.frames.first(), 20, "Animation should be on first frame after transition"
   
 test "Animation should fire Complete event after updating past the last frame", ->
   window.completeFired = false

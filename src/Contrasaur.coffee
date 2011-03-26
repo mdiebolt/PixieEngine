@@ -404,7 +404,15 @@ Contrasaur = (I) ->
           self.transition("Walk")
           
         unless keydown.z || keydown.x || keydown.b
-          self.transition("Idle1")          
+          self.transition("Idle1") 
+          
+    transform: ->
+      m = Matrix.IDENTITY
+      
+      if keydown.z
+        m = Matrix.HORIZONTAL_FLIP
+
+      return m
           
   self.include(Animated)
   
