@@ -372,7 +372,7 @@ Contrasaur = (I) ->
          "frames":[8,9,10,11]
       },
       {
-         "complete":"Idle1",
+         "complete":"Walk",
          "name":"Walk",
          "speed":"110",
          "frames":[12,13,14,15,16,17,18,19]
