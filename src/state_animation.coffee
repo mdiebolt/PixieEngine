@@ -51,13 +51,20 @@ Animated = (I, self) ->
       I.height = I.spriteLookup[I.activeAnimation.frames[0]].height 
   
   before:  
-    update: -> 
-      time = new Date().getTime()
-              
-      updateFrame = (time - I.lastUpdate) >= I.activeAnimation.speed
-      
-      if updateFrame
-        I.lastUpdate = time
+    update: (useTimer) -> 
+      if useTimer
+        time = new Date().getTime()
+                
+        updateFrame = (time - I.lastUpdate) >= I.activeAnimation.speed
+        
+        if updateFrame
+          I.lastUpdate = time
+          if I.activeAnimation.triggers && I.activeAnimation.triggers[I.currentFrameIndex]
+            I.activeAnimation.triggers[I.currentFrameIndex].each (event) ->
+              self.trigger(event)
+            
+          advanceFrame()
+      else
         if I.activeAnimation.triggers && I.activeAnimation.triggers[I.currentFrameIndex]
           I.activeAnimation.triggers[I.currentFrameIndex].each (event) ->
             self.trigger(event)
