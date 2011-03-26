@@ -353,6 +353,7 @@ animationData = `{
       {
          "name":"Bite",
          "complete":"Idle1",
+         "continuous":true,
          "speed":"110",
          "triggers": {
            "0":["whiteParticles"],
