@@ -391,30 +391,20 @@ Contrasaur = (I) ->
       }
    ]
 }`
- 
-  GRAVITY = Point(0, 1)
-  
+   
   $.reverseMerge I,
     data: animationData
-      
-  PHYSICS =
-    platform: () ->
-      if keydown.b
-        self.transition("Bite")
-      if keydown.z
-        self.transition("Walk")
-      if keydown.x
-        self.transition("Walk")
-        
-      unless keydown.z || keydown.x || keydown.b
-        self.transition("Idle1")
-                
-  physics = PHYSICS.platform
     
   self = GameObject(I).extend
     before:            
       update: ->      
-        physics()
+        if keydown.b
+          self.transition("bite")
+        if keydown.z || keydown.x
+          self.transition("Walk")
+          
+        unless keydown.z || keydown.x || keydown.b
+          self.transition("Idle1")          
           
   self.include(Animated)
   

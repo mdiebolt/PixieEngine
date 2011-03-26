@@ -30,7 +30,7 @@ Animated = (I, self) ->
     result = null
     
     I.data.animations.each (animation) ->
-      result = animation if animation.name == name
+      result = animation if animation.name.toLowerCase() == name.toLowerCase()
                
     return result  
 
