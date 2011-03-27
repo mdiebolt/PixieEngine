@@ -22,7 +22,7 @@ Animated = (I, self) ->
       if nextState
         I.activeAnimation = find(nextState) || I.activeAnimation
         I.width = I.spriteLookup[I.activeAnimation.frames[0]].width
-        I.height = I.spriteLookup[I.activeAnimation.frames[0]].height 
+        I.height = I.spriteLookup[I.activeAnimation.frames[0]].height
 
     I.currentFrameIndex = I.activeAnimation.frames[(frames.indexOf(I.currentFrameIndex) + 1) % frames.length]
 
