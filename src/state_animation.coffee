@@ -47,11 +47,14 @@ Animated = (I, self) ->
   transition: (newState) ->
     if newState != I.activeAnimation.name && !I.activeAnimation.continuous
       I.activeAnimation = find(newState) || I.activeAnimation
+      I.currentFrameIndex = I.activeAnimation.frames.first()
       I.width = I.spriteLookup[I.activeAnimation.frames[0]].width
       I.height = I.spriteLookup[I.activeAnimation.frames[0]].height 
   
   before:  
     update: (useTimer) -> 
+      log I.currentFrameIndex if I.activeAnimation.name != "Idle1"
+      
       if useTimer
         time = new Date().getTime()
                 
