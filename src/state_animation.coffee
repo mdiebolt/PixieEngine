@@ -59,9 +59,7 @@ Animated = (I, self) ->
       I.height = firstSprite.height 
   
   before:  
-    update: (useTimer) -> 
-      log I.currentFrameIndex if I.activeAnimation.name != "Idle1"
-      
+    update: (useTimer) ->       
       if useTimer
         time = new Date().getTime()
                 
