@@ -1,3 +1,8 @@
+b2Vec2 = Box2D.Common.Math.b2Vec2
+b2AABB = Box2D.Collision.b2AABB
+{b2BodyDef, b2Body, b2FixtureDef, b2Fixture, b2World, b2DebugDraw} = Box2D.Dynamics
+{b2MassData, b2PolygonShape, b2CircleShape} = Box2D.Collision.Shapes
+
 window.engine = Engine
   canvas: $("canvas").powerCanvas()
   FPS: 60
