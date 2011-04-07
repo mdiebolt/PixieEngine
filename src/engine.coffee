@@ -69,7 +69,7 @@
          
     updatePhysics = ->
       world.Step(1 / 30, 10, 10)
-      world.DrawDebugData()
+      #world.DrawDebugData()
       world.ClearForces()       
                         
     # End Physics
