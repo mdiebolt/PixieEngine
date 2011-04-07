@@ -26,7 +26,7 @@
       b2Vec2 = Box2D.Common.Math.b2Vec2
       {b2BodyDef, b2Body, b2FixtureDef, b2Fixture, b2World, b2DebugDraw} = Box2D.Dynamics
       {b2MassData, b2PolygonShape, b2CircleShape} = Box2D.Collision.Shapes
-             
+       
       world = new b2World(new b2Vec2(0, 10), true)
          
       fixDef = new b2FixtureDef
@@ -53,9 +53,9 @@
         else
           fixDef.shape = new b2CircleShape(rand() + 0.1)
         
-        bodyDef.position.x = rand() * 10;
-        bodyDef.position.y = rand() * 10;
-        world.CreateBody(bodyDef).CreateFixture(fixDef);
+        bodyDef.position.x = rand() * 10
+        bodyDef.position.y = rand() * 10
+        world.CreateBody(bodyDef).CreateFixture(fixDef)
                   
     updatePhysics = ->
       world.Step(1 / 30, 10, 10)
