@@ -5,7 +5,7 @@
  
   window.Engine = (options) ->
     options = $.extend({}, defaults, options)
-    
+     
     intervalId = null
     savedState = null
     age = 0
