@@ -63,7 +63,7 @@
     world.SetDebugDraw(debugDraw)   
     
     updatePhysics = ->
-      world.Step(1 / 30, 10, 10)     
+      world.Step(1 / 60, 10, 10)     
       world.DrawDebugData()
       world.ClearForces()  
  
@@ -94,17 +94,14 @@
     canvas = options.canvas || $("<canvas />").powerCanvas()
     
     construct = (entityData) -> 
-      if entityData.class == "Moogle"
+      if entityData.class == "Moogle"      
         bodyDef.type = b2Body.b2_dynamicBody
-        rect(0.5, 1) 
-        fixDef.shape = new b2PolygonShape
-        fixDef.shape.SetAsBox(0.5, 1)                         
+        rect(entityData.width * SCALE, entityData.height * SCALE) 
         bodyDef.position = vec(entityData.x * SCALE, entityData.y * SCALE)
         world.CreateBody(bodyDef).CreateFixture(fixDef)  
   
       if entityData.class
         bodyDef.userData = entityData.class.constantize()(entityData)
-        log bodyDef
       else
         bodyDef.userData = GameObject(entityData)
     
