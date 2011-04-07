@@ -107,6 +107,7 @@
     canvas = options.canvas || $("<canvas />").powerCanvas()
     
     construct = (entityData) ->
+      log entityData
       if entityData.class
         entityData.class.constantize()(entityData)
       else
