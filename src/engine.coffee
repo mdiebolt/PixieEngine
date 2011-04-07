@@ -73,7 +73,6 @@
     bodyDef.position.y = 5
     world.CreateBody(bodyDef).CreateFixture(fixDef)
   
-
     # setup debug draw
     debugDraw = new b2DebugDraw()      
     debugDraw.SetSprite(options.canvas.get(0).getContext("2d"))
