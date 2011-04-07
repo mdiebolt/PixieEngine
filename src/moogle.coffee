@@ -11,16 +11,13 @@ Moogle = (I) ->
   shooting = false
   laserEndpoint = null
 
-  PHYSICS =
-    platform: () ->
-      if keydown.up
-        I.bodyData.ApplyImpulse(vec(0, -50), I.bodyData.GetPosition())        
-      if keydown.right
-        I.bodyData.ApplyImpulse(vec(50, 0), I.bodyData.GetPosition())
-      if keydown.left
-        I.bodyData.ApplyImpulse(vec(-50, 0), I.bodyData.GetPosition())
-
-  physics = PHYSICS.platform
+  physics = ->
+    if keydown.up
+      I.bodyData.ApplyImpulse(vec(0, -50), I.bodyData.GetPosition())        
+    if keydown.right
+      I.bodyData.ApplyImpulse(vec(50, 0), I.bodyData.GetPosition())
+    if keydown.left
+      I.bodyData.ApplyImpulse(vec(-50, 0), I.bodyData.GetPosition())
 
   laserColors = [
     "rgba(255, 0, 128, 0.75)"
