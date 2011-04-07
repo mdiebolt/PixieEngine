@@ -37,7 +37,7 @@ Moogle = (I) ->
         
       # Move around based on input
       if keydown.right
-        I.velocity.x += 2
+        I.bodyData.ApplyImpulse(new b2Vec2(2, 0), new b2Vec2(0, 0))
       if keydown.left
         I.velocity.x -= 2
       unless keydown.left || keydown.right
@@ -51,23 +51,7 @@ Moogle = (I) ->
         lastDirection = I.velocity.x.sign() 
         
       I.velocity.x = I.velocity.x.clamp(-8, 8)
-      
-    arena: () ->
-      I.velocity.y = I.velocity.y.approach(0, 1)
-      I.velocity.x = I.velocity.x.approach(0, 1)
-      
-      if Game.keydown("right")
-        I.velocity.x += 2
-      if Game.keydown("left")
-        I.velocity.x -= 2
-      if Game.keydown("up")
-        I.velocity.y -= 2
-      if Game.keydown("down")
-        I.velocity.y += 2
-
-      I.velocity.y = I.velocity.y.clamp(-I.speed, I.speed)
-      I.velocity.x = I.velocity.x.clamp(-I.speed, I.speed)
-  
+        
   physics = PHYSICS.platform
   
   laserColors = [
