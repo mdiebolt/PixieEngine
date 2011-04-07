@@ -102,7 +102,7 @@
         update()
         age += 1
 
-      draw()
+      #draw()
    
     canvas = options.canvas || $("<canvas />").powerCanvas()
     
