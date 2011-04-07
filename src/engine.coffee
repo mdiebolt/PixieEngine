@@ -20,7 +20,17 @@
     cameraTransform = Matrix.IDENTITY
      
     # Physics
+    vec = (x, y) ->
+      new b2Vec2(x, y)
+      
+    rect = (x, y) ->
+      fixDef.shape = new b2PolygonShape
+      fixDef.shape.SetAsBox(x, y)
+    
     SCALE = 0.01
+    DENSITY = 1.0
+    FRICTION = 0.5
+    RESTITUTION = 0.2
     
     world = null
       
@@ -29,19 +39,18 @@
     {b2BodyDef, b2Body, b2FixtureDef, b2Fixture, b2World, b2DebugDraw} = Box2D.Dynamics
     {b2MassData, b2PolygonShape, b2CircleShape} = Box2D.Collision.Shapes     
         
-    world = new b2World(Point(0, 10), true)
+    world = new b2World(vec(0, 10), true)
        
     fixDef = new b2FixtureDef
-    fixDef.density = 1.0
-    fixDef.friction = 0.5
-    fixDef.restitution = 0.2
+    fixDef.density = DENSITY
+    fixDef.friction = FRICTION
+    fixDef.restitution = RESTITUTION
        
     bodyDef = new b2BodyDef
        
     # ground   
-    bodyDef.position = Point(11, 13)
-    fixDef.shape = new b2PolygonShape
-    fixDef.shape.SetAsBox(10, 0.5)
+    bodyDef.position = vec(11, 13)
+    rect(10, 0.5)
     world.CreateBody(bodyDef).CreateFixture(fixDef)
           
     # setup debug draw
@@ -86,10 +95,11 @@
     
     construct = (entityData) -> 
       if entityData.class == "Moogle"
-        bodyDef.type = b2Body.b2_dynamicBody 
+        bodyDef.type = b2Body.b2_dynamicBody
+        rect(0.5, 1) 
         fixDef.shape = new b2PolygonShape
         fixDef.shape.SetAsBox(0.5, 1)                         
-        bodyDef.position = Point(entityData.x * SCALE, entityData.y * SCALE)
+        bodyDef.position = vec(entityData.x * SCALE, entityData.y * SCALE)
         world.CreateBody(bodyDef).CreateFixture(fixDef)  
   
       if entityData.class
