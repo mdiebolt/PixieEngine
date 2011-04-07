@@ -57,29 +57,20 @@
         bodyDef.position.x = Math.random() * 10;
         bodyDef.position.y = Math.random() * 10;
         world.CreateBody(bodyDef).CreateFixture(fixDef);
-     }
          
-         //setup debug draw
-         var debugDraw = new b2DebugDraw();
-      debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
-      debugDraw.SetDrawScale(30.0);
-      debugDraw.SetFillAlpha(0.3);
-      debugDraw.SetLineThickness(1.0);
-      debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
-      world.SetDebugDraw(debugDraw);
+      # debug draw
+      debugDraw = new b2DebugDraw()
+      debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"))
+      debugDraw.SetDrawScale(30.0)
+      debugDraw.SetFillAlpha(0.3)
+      debugDraw.SetLineThickness(1.0)
+      debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
+      world.SetDebugDraw(debugDraw)
          
-         window.setInterval(update, 1000 / 30);
-      };
-      
-      function update() {
-         world.Step(
-               1 / 30   //frame-rate
-            ,  10       //velocity iterations
-            ,  10       //position iterations
-         );
-         world.DrawDebugData();
-         world.ClearForces();
-      };        
+      updatePhysics = ->
+        world.Step(1 / 30, 10, 10))
+         world.DrawDebugData()
+         world.ClearForces()       
                         
     # End Physics   
   
