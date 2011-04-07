@@ -74,11 +74,10 @@
       world.SetDebugDraw(debugDraw)   
     
     updatePhysics = ->
-      debugger
-      world.Step(1 / 30, 10, 10)
+      world.Step(1 / 30, 10, 10)     
       world.DrawDebugData()
-      world.ClearForces()       
-                        
+      world.ClearForces()  
+ 
     # End Physics
  
     init()   
