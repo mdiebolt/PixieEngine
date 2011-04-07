@@ -20,10 +20,10 @@
     cameraTransform = Matrix.IDENTITY
      
     # Physics
-    vec = (x, y) ->
+    window.vec = (x, y) ->
       new b2Vec2(x, y)
       
-    rect = (x, y) ->
+    window.rect = (x, y) ->
       fixDef.shape = new b2PolygonShape
       fixDef.shape.SetAsBox(x, y)
     

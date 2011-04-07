@@ -26,22 +26,18 @@ Moogle = (I) ->
   PHYSICS =
     platform: () ->
       if jumping
-        I.velocity.y += GRAVITY.scale(0.5).y
-      else if falling
-        I.velocity.y += GRAVITY.y
+        log "got here"
+        I.bodyData.ApplyImpulse(vec(0, -20), vec(I.x + I.width / 2, I.y + I.height / 2))
       else
 
         if keydown.up
           jumping = true
-          I.velocity.y = -7 * GRAVITY.y - 2
         
       # Move around based on input
       if keydown.right
-        I.bodyData.ApplyImpulse(new b2Vec2(2, 0), new b2Vec2(0, 0))
+        I.bodyData.ApplyImpulse(vec(0.2, 0), vec(I.x + I.width / 2, I.y + I.height / 2))
       if keydown.left
-        I.velocity.x -= 2
-      unless keydown.left || keydown.right
-        I.velocity.x = 0
+        I.bodyData.ApplyImpulse(vec(-0.2, 0), vec(I.x + I.width / 2, I.y + I.height / 2))
       unless keydown.up
         jumping = false
         
