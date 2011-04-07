@@ -1,8 +1,6 @@
 Moogle = (I) ->
   I ||= {}
-  
-  GRAVITY = Point(0, 2)
-  
+
   $.reverseMerge I,
     color: "blue"
     solid: false
@@ -12,18 +10,18 @@ Moogle = (I) ->
 
   shooting = false
   laserEndpoint = null
-  
+
   PHYSICS =
     platform: () ->
       if keydown.up
-          I.bodyData.ApplyImpulse(vec(0, -50), I.bodyData.GetPosition())        
-        if keydown.right
-          I.bodyData.ApplyImpulse(vec(50, 0), I.bodyData.GetPosition())
-        if keydown.left
-          I.bodyData.ApplyImpulse(vec(-50, 0), I.bodyData.GetPosition())
-        
+        I.bodyData.ApplyImpulse(vec(0, -50), I.bodyData.GetPosition())        
+      if keydown.right
+        I.bodyData.ApplyImpulse(vec(50, 0), I.bodyData.GetPosition())
+      if keydown.left
+        I.bodyData.ApplyImpulse(vec(-50, 0), I.bodyData.GetPosition())
+
   physics = PHYSICS.platform
-  
+
   laserColors = [
     "rgba(255, 0, 128, 0.75)"
     "rgba(255, 0, 128, 0.75)"
@@ -31,9 +29,9 @@ Moogle = (I) ->
     "rgba(255, 255, 255, 0.25)"
     "rgba(32, 190, 230, 0.25)"
   ]
-  
+
   particleSizes = [2, 8, 4, 6]
-    
+
   self = GameObject(I).extend
     before:
       draw: (canvas) ->
@@ -42,7 +40,7 @@ Moogle = (I) ->
           5.times ->
             canvas.strokeColor laserColors.rand()
             canvas.drawLine(laserStart.x, laserStart.y, laserEndpoint.x, laserEndpoint.y, 2)
-            
+
       update: ->
         physics()
 
@@ -52,7 +50,7 @@ Moogle = (I) ->
           shootDirection = Point(lastDirection, 0)
 
         laserEndpoint = null
-          
+
         if shootDirection
           center = self.centeredBounds()
           if nearestHit = engine.rayCollides(center, shootDirection)
@@ -82,7 +80,7 @@ Moogle = (I) ->
 
           else
             laserEndpoint = shootDirection.norm().scale(1000).add(I)
-                  
+
         if object?.I.destructable
           object.I.active = false
           engine.add
@@ -104,12 +102,12 @@ Moogle = (I) ->
                 Point.fromAngle(Random.angle()).scale(rand(5) + 5)
               width: (n) ->
                 particleSizes.wrap(n) * 3
-      
+
         engine.eachObject (object) ->
           if object.I.open && Collision.rectangular(I, object.bounds())
             if I.active
               I.active = false
               engine.queue(nextLevel)
-    
+
   self
 
