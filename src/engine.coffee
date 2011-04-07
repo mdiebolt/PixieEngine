@@ -54,6 +54,11 @@
     rect(60, 2)
     world.CreateBody(bodyDef).CreateFixture(fixDef)
 
+    # boxes in air
+    bodyDef.position = vec(60, 50)
+    rect(20, 20)
+    world.CreateBody(bodyDef).CreateFixture(fixDef)
+
     # setup debug draw
     debugDraw = new b2DebugDraw()      
     debugDraw.SetSprite(options.canvas.get(0).getContext("2d"))
@@ -144,15 +149,6 @@
 
       eachObject: (iterator) ->
         objects.each iterator
-
-      collides: (bounds, selector) ->            
-        objects.inject [], (collidingObjects, object) ->
-          if object.solid() && object.collides(bounds)
-            collidingObjects.push(object) 
-
-          collidingObjects   
-
-        .length
 
       rayCollides: (source, direction) ->
         hits = objects.map (object) ->
