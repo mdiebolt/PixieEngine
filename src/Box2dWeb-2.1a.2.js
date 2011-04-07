@@ -18,13 +18,13 @@
 var a2j = {};
 
 (function (a2j, window) {
-   
+
    if(!window.flash) window.flash = {utils: {Dictionary: Object} };
    else if(!window.flash.utils) window.flash.utils = {Dictionary: Object};
    else if(!window.flash.utils.Dictionary) window.flash.utils.Dictionary = Object;
-   
+
    window.Vector = window.Array;
-   
+
    Function.prototype.inherit = function (base) {
       var tmpCtr = this;
       var empty = Function.prototype.inherit.empty;
@@ -33,24 +33,24 @@ var a2j = {};
       this.prototype.constructor = tmpCtr;
    };
    Function.prototype.inherit.empty = function () {};
-   
+
    window.trace = function () {
       if (window.console && (window.console.log instanceof Function)) window.console.log.apply(window.console, arguments);
    };
    window.assert = function () {
       if (window.console && (window.console.assert instanceof Function)) window.console.assert.apply(window.console, arguments);
    };
-      
+
    a2j.warn = function warn() {
       if (window.console) console.warn.apply(console, arguments);
    };
-   
+
    a2j.generateCallback = function generateCallback(context, cb) {
       return function () {
          cb.apply(context, arguments);
       };
    };
-   
+
    a2j.NVector = function NVector(length) {
       if (length === undefined) length = 0;
       var tmp = new Array(length || 0);
@@ -58,18 +58,18 @@ var a2j = {};
       tmp[i] = 0;
       return tmp;
    };
-   
+
    a2j.is = function is(o1, o2) {
       if (o1 === null) return false;
       if ((o2 instanceof Function) && (o1 instanceof o2)) return true;
       if ((o1.constructor.__implements != undefined) && (o1.constructor.__implements[o2])) return true;
       return false;
    };
-   
+
    a2j.parseUInt = function(v) {
       return Math.abs(parseInt(v));
    }
-   
+
 })(a2j, window, undefined);
 
 var Vector_a2j_Number = a2j.NVector;
@@ -2495,8 +2495,9 @@ _A2J_postDefs = []; /* source: disabled*/
       var __this = this;
       __this.m_pairCount = 0;
       var queryProxy;
-      for (var each in __this.m_moveBuffer) {
-         queryProxy = __this.m_moveBuffer[each]; {
+
+      for (var i=0; i < __this.m_moveBuffer.length; i++) {
+         queryProxy = __this.m_moveBuffer[i]; {
             function QueryCallback(proxy) {
                if (proxy == queryProxy) return true;
                if (__this.m_pairCount == __this.m_pairBuffer.length) {
@@ -3992,8 +3993,9 @@ _A2J_postDefs = []; /* source: disabled*/
       if (vertexCount === undefined) vertexCount = 0;
       var v = new Vector();
       var tVec;
-      for (var each in vertices) {
-         tVec = vertices[each]; {
+
+      for (var i = 0; i < vertices.length; i++) {
+         tVec = vertices[i]; {
             v.push(tVec);
          }
       }
@@ -11824,7 +11826,7 @@ _A2J_postDefs = [];
       this.m_xformScale = 1.0;
       var __this = this;
       //#WORKAROUND
-      this.m_sprite = {graphics: {clear: 
+      this.m_sprite = {graphics: {clear:
          function() {__this.m_ctx.clearRect(0,0,__this.m_ctx.canvas.width,__this.m_ctx.canvas.height)}
       }};
    };
