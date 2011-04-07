@@ -25,7 +25,6 @@ $(document).bind "contextmenu", (event) ->
 
 $(document).mousedown (event) ->
   if developer
-    console.log event.which
 
     if event.which == 3
       if object = engine.objectAt(event.pageX, event.pageY)
@@ -33,7 +32,6 @@ $(document).mousedown (event) ->
         
         objectToUpdate = object
         
-      console.log object
     else if event.which == 2 || keydown.shift
       engine.add $.extend(
         x: event.pageX.snap(32)
