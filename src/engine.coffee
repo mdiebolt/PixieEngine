@@ -37,8 +37,7 @@
     bodyDef = new b2BodyDef
        
     # ground   
-    bodyDef.type = b2Body.b2_staticBody
-    bodyDef.position.x = 9
+    bodyDef.position.x = 11
     bodyDef.position.y = 13
     fixDef.shape = new b2PolygonShape
     fixDef.shape.SetAsBox(10, 0.5)
