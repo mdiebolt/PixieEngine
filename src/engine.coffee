@@ -60,19 +60,21 @@
          
       # debug draw
       debugDraw = new b2DebugDraw()
-      debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"))
+      debugDraw.SetSprite(options.canvas)
       debugDraw.SetDrawScale(30.0)
       debugDraw.SetFillAlpha(0.3)
       debugDraw.SetLineThickness(1.0)
       debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
       world.SetDebugDraw(debugDraw)
          
-      updatePhysics = ->
-        world.Step(1 / 30, 10, 10))
-         world.DrawDebugData()
-         world.ClearForces()       
+    updatePhysics = ->
+      world.Step(1 / 30, 10, 10)
+      world.DrawDebugData()
+      world.ClearForces()       
                         
-    # End Physics   
+    # End Physics
+ 
+    init()   
   
     update = ->
       objects = objects.select (object) ->
@@ -92,7 +94,7 @@
         update()
         age += 1
         
-        updateWorld?()
+        updatePhysics()
 
       draw()
    
