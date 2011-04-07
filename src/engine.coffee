@@ -27,7 +27,7 @@
       fixDef.shape = new b2PolygonShape
       fixDef.shape.SetAsBox(x, y)
     
-    SCALE = 0.01
+    SCALE = 0.1
     DENSITY = 1.0
     FRICTION = 0.5
     RESTITUTION = 0.2
@@ -49,14 +49,14 @@
     bodyDef = new b2BodyDef
        
     # ground   
-    bodyDef.position = vec(11, 13)
-    rect(10, 0.5)
+    bodyDef.position = vec(21.25, 30)
+    rect(21, 0.5)
     world.CreateBody(bodyDef).CreateFixture(fixDef)
           
     # setup debug draw
     debugDraw = new b2DebugDraw()      
     debugDraw.SetSprite(options.canvas.get(0).getContext("2d"))
-    debugDraw.SetDrawScale(30.0)
+    debugDraw.SetDrawScale(15.0)
     debugDraw.SetFillAlpha(0.3)
     debugDraw.SetLineThickness(1.0)
     debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
@@ -98,12 +98,16 @@
         bodyDef.type = b2Body.b2_dynamicBody
         rect(entityData.width * SCALE, entityData.height * SCALE) 
         bodyDef.position = vec(entityData.x * SCALE, entityData.y * SCALE)
-        world.CreateBody(bodyDef).CreateFixture(fixDef)  
-  
+        
+        body = world.CreateBody(bodyDef)        
+        body.CreateFixture(fixDef) 
+       
+        $.extend(entityData, { bodyData: body })
+             
       if entityData.class
-        bodyDef.userData = entityData.class.constantize()(entityData)
+        entityData.class.constantize()(entityData)
       else
-        bodyDef.userData = GameObject(entityData)
+        GameObject(entityData)
     
     self =
       add: (entityData) ->
