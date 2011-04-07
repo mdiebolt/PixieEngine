@@ -5,47 +5,22 @@ Moogle = (I) ->
   
   $.reverseMerge I,
     color: "blue"
-    speed: 6
-    acceleration: Point(0, 0)
     solid: false
     width: 16
     height: 16
-    velocity: Point(0, 0)
     excludedModules: ["Movable"]
 
-  # Cast acceleration and velocity to points
-  I.acceleration = Point(I.acceleration.x, I.acceleration.y)
-  I.velocity = Point(I.velocity.x, I.velocity.y)
-
-  jumping = false
-  falling = true
-  lastDirection = 1
   shooting = false
   laserEndpoint = null
   
   PHYSICS =
     platform: () ->
-      if jumping
-        I.bodyData.ApplyImpulse(vec(0, -20), vec(I.x + I.width / 2, I.y + I.height / 2))
-      else
-
-        if keydown.up
-          jumping = true
-        
-      # Move around based on input
-      if keydown.right
-        I.bodyData.ApplyForce(vec(20, 0), vec(I.x + I.width / 2, I.y + I.height / 2))
-      if keydown.left
-        I.bodyData.ApplyForce(vec(-20, 0), vec(I.x + I.width / 2, I.y + I.height / 2))
-      unless keydown.up
-        jumping = false
-        
-      shooting = keydown.space
-        
-      if I.velocity.x.sign()
-        lastDirection = I.velocity.x.sign() 
-        
-      I.velocity.x = I.velocity.x.clamp(-8, 8)
+      if keydown.up
+          I.bodyData.ApplyImpulse(vec(0, -50), I.bodyData.GetPosition())        
+        if keydown.right
+          I.bodyData.ApplyImpulse(vec(50, 0), I.bodyData.GetPosition())
+        if keydown.left
+          I.bodyData.ApplyImpulse(vec(-50, 0), I.bodyData.GetPosition())
         
   physics = PHYSICS.platform
   
@@ -69,27 +44,7 @@ Moogle = (I) ->
             canvas.drawLine(laserStart.x, laserStart.y, laserEndpoint.x, laserEndpoint.y, 2)
             
       update: ->
-        if engine.collides(self.bounds(0, 1))
-          falling = false
-        else
-          falling = true
-
         physics()
-
-        #TODO Reduct the # of calls to collides
-        I.velocity.x.abs().times ->
-          if !engine.collides(self.bounds(I.velocity.x.sign(), 0))
-            I.x += I.velocity.x.sign()
-          else 
-            I.velocity.x = 0
-    
-        #TODO Reduct the # of calls to collides
-        I.velocity.y.abs().times ->
-          if !engine.collides(self.bounds(0, I.velocity.y.sign()))
-            I.y += I.velocity.y.sign()
-          else 
-            I.velocity.y = 0
-            jumping = false
 
         if Mouse.left
           shootDirection = Mouse.location.subtract(I)

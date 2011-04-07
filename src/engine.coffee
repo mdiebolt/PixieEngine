@@ -27,7 +27,7 @@
       fixDef.shape = new b2PolygonShape
       fixDef.shape.SetAsBox(x, y)
     
-    SCALE = 0.1
+    window.SCALE = 0.1
     DENSITY = 1.0
     FRICTION = 0.5
     RESTITUTION = 0.2
