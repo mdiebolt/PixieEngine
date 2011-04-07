@@ -26,7 +26,6 @@ Moogle = (I) ->
   PHYSICS =
     platform: () ->
       if jumping
-        log "got here"
         I.bodyData.ApplyImpulse(vec(0, -20), vec(I.x + I.width / 2, I.y + I.height / 2))
       else
 
@@ -35,9 +34,9 @@ Moogle = (I) ->
         
       # Move around based on input
       if keydown.right
-        I.bodyData.ApplyImpulse(vec(0.2, 0), vec(I.x + I.width / 2, I.y + I.height / 2))
+        I.bodyData.ApplyForce(vec(20, 0), vec(I.x + I.width / 2, I.y + I.height / 2))
       if keydown.left
-        I.bodyData.ApplyImpulse(vec(-0.2, 0), vec(I.x + I.width / 2, I.y + I.height / 2))
+        I.bodyData.ApplyForce(vec(-20, 0), vec(I.x + I.width / 2, I.y + I.height / 2))
       unless keydown.up
         jumping = false
         
