@@ -39,7 +39,7 @@
     {b2BodyDef, b2Body, b2FixtureDef, b2Fixture, b2World, b2DebugDraw} = Box2D.Dynamics
     {b2MassData, b2PolygonShape, b2CircleShape} = Box2D.Collision.Shapes     
         
-    world = new b2World(vec(0, 10), true)
+    world = new b2World(vec(0, 40), true)
        
     fixDef = new b2FixtureDef
     fixDef.density = DENSITY
@@ -49,14 +49,14 @@
     bodyDef = new b2BodyDef
        
     # ground   
-    bodyDef.position = vec(21.25, 30)
-    rect(21, 0.5)
+    bodyDef.position = vec(65, 90)
+    rect(60, 2)
     world.CreateBody(bodyDef).CreateFixture(fixDef)
           
     # setup debug draw
     debugDraw = new b2DebugDraw()      
     debugDraw.SetSprite(options.canvas.get(0).getContext("2d"))
-    debugDraw.SetDrawScale(15.0)
+    debugDraw.SetDrawScale(5.0)
     debugDraw.SetFillAlpha(0.3)
     debugDraw.SetLineThickness(1.0)
     debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
