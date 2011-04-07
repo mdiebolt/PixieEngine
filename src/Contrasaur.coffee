@@ -415,8 +415,5 @@ Contrasaur = (I) ->
       return m
           
   self.include(Animated)
-  
-  self.bind 'chompSound', ->
-    log "chomp like a champ"
- 
+   
   self
