@@ -24,8 +24,15 @@
       
     init = ->
       b2Vec2 = Box2D.Common.Math.b2Vec2
-      {b2BodyDef, b2Body, b2FixtureDef, b2Fixture, b2World, b2DebugDraw} = Box2D.Dynamics
-      {b2MassData, b2PolygonShape, b2CircleShape} = Box2D.Collision.Shapes
+      b2BodyDef = Box2D.Dynamics.b2BodyDef
+      b2Body = Box2D.Dynamics.b2Body
+      b2FixtureDef = Box2D.Dynamics.b2FixtureDef
+      b2Fixture = Box2D.Dynamics.b2Fixture
+      b2World = Box2D.Dynamics.b2World
+      b2MassData = Box2D.Collision.Shapes.b2MassData
+      b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
+      b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
+      b2DebugDraw = Box2D.Dynamics.b2DebugDraw
        
       world = new b2World(new b2Vec2(0, 10), true)
          
@@ -56,9 +63,20 @@
         bodyDef.position.x = rand() * 10
         bodyDef.position.y = rand() * 10
         world.CreateBody(bodyDef).CreateFixture(fixDef)
-                  
+    
+      # setup debug draw
+      debugDraw = new b2DebugDraw()      
+      debugDraw.SetSprite(options.canvas.get(0).getContext("2d"))
+      debugDraw.SetDrawScale(30.0)
+      debugDraw.SetFillAlpha(0.3)
+      debugDraw.SetLineThickness(1.0)
+      debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
+      world.SetDebugDraw(debugDraw)   
+    
     updatePhysics = ->
+      debugger
       world.Step(1 / 30, 10, 10)
+      world.DrawDebugData()
       world.ClearForces()       
                         
     # End Physics
@@ -71,6 +89,8 @@
         
       objects = objects.concat(queuedObjects)
       queuedObjects = []
+
+      updatePhysics()
   
     draw = ->
       canvas.withTransform cameraTransform, (canvas) ->
@@ -82,8 +102,6 @@
       unless paused
         update()
         age += 1
-        
-        updatePhysics()
 
       draw()
    
