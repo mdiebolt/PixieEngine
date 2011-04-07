@@ -23,16 +23,10 @@
     world = null
       
     b2Vec2 = Box2D.Common.Math.b2Vec2
-    b2BodyDef = Box2D.Dynamics.b2BodyDef
-    b2Body = Box2D.Dynamics.b2Body
-    b2FixtureDef = Box2D.Dynamics.b2FixtureDef
-    b2Fixture = Box2D.Dynamics.b2Fixture
-    b2World = Box2D.Dynamics.b2World
-    b2MassData = Box2D.Collision.Shapes.b2MassData
-    b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
-    b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
-    b2DebugDraw = Box2D.Dynamics.b2DebugDraw
-     
+    b2AABB = Box2D.Collision.b2AABB
+    {b2BodyDef, b2Body, b2FixtureDef, b2Fixture, b2World, b2DebugDraw} = Box2D.Dynamics
+    {b2MassData, b2PolygonShape, b2CircleShape} = Box2D.Collision.Shapes     
+        
     world = new b2World(new b2Vec2(0, 10), true)
        
     fixDef = new b2FixtureDef
@@ -49,30 +43,7 @@
     fixDef.shape = new b2PolygonShape
     fixDef.shape.SetAsBox(10, 0.5)
     world.CreateBody(bodyDef).CreateFixture(fixDef)
-       
-    # create some objects
-    ###
-    bodyDef.type = b2Body.b2_dynamicBody
-    10.times (i) ->
-      if rand() > 0.5
-        fixDef.shape = new b2PolygonShape
-        fixDef.shape.SetAsBox(0.5, 1)
-      else
-        fixDef.shape = new b2CircleShape(rand() + 0.1)
-      
-      bodyDef.position.x = rand() * 10
-      bodyDef.position.y = rand() * 10
-      world.CreateBody(bodyDef).CreateFixture(fixDef)
-    ###
- 
-    bodyDef.type = b2Body.b2_dynamicBody 
-    fixDef.shape = new b2PolygonShape
-    fixDef.shape.SetAsBox(0.5, 1)
-             
-    bodyDef.position.x = 5
-    bodyDef.position.y = 5
-    world.CreateBody(bodyDef).CreateFixture(fixDef)
-  
+          
     # setup debug draw
     debugDraw = new b2DebugDraw()      
     debugDraw.SetSprite(options.canvas.get(0).getContext("2d"))
@@ -113,7 +84,16 @@
    
     canvas = options.canvas || $("<canvas />").powerCanvas()
     
-    construct = (entityData) ->    
+    construct = (entityData) -> 
+      if entityData.class == "Moogle"
+        bodyDef.type = b2Body.b2_dynamicBody 
+        fixDef.shape = new b2PolygonShape
+        fixDef.shape.SetAsBox(0.5, 1)
+                              
+        bodyDef.position.x = 5
+        bodyDef.position.y = 5
+        world.CreateBody(bodyDef).CreateFixture(fixDef)  
+  
       if entityData.class
         entityData.class.constantize()(entityData)
       else
@@ -122,7 +102,7 @@
     self =
       add: (entityData) ->
         obj = construct entityData
-        
+                
         if intervalId && !paused
           queuedObjects.push obj
         else
