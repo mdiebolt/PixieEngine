@@ -57,19 +57,9 @@
         bodyDef.position.x = Math.random() * 10;
         bodyDef.position.y = Math.random() * 10;
         world.CreateBody(bodyDef).CreateFixture(fixDef);
-         
-      # debug draw
-      debugDraw = new b2DebugDraw()
-      debugDraw.SetSprite(options.canvas)
-      debugDraw.SetDrawScale(30.0)
-      debugDraw.SetFillAlpha(0.3)
-      debugDraw.SetLineThickness(1.0)
-      debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
-      world.SetDebugDraw(debugDraw)
-         
+                  
     updatePhysics = ->
       world.Step(1 / 30, 10, 10)
-      #world.DrawDebugData()
       world.ClearForces()       
                         
     # End Physics
