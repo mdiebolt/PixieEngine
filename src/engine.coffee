@@ -20,6 +20,8 @@
     cameraTransform = Matrix.IDENTITY
      
     # Physics
+    SCALE = 0.01
+    
     world = null
       
     b2Vec2 = Box2D.Common.Math.b2Vec2
@@ -27,7 +29,7 @@
     {b2BodyDef, b2Body, b2FixtureDef, b2Fixture, b2World, b2DebugDraw} = Box2D.Dynamics
     {b2MassData, b2PolygonShape, b2CircleShape} = Box2D.Collision.Shapes     
         
-    world = new b2World(new b2Vec2(0, 10), true)
+    world = new b2World(Point(0, 10), true)
        
     fixDef = new b2FixtureDef
     fixDef.density = 1.0
@@ -37,8 +39,7 @@
     bodyDef = new b2BodyDef
        
     # ground   
-    bodyDef.position.x = 11
-    bodyDef.position.y = 13
+    bodyDef.position = Point(11, 13)
     fixDef.shape = new b2PolygonShape
     fixDef.shape.SetAsBox(10, 0.5)
     world.CreateBody(bodyDef).CreateFixture(fixDef)
@@ -87,16 +88,15 @@
       if entityData.class == "Moogle"
         bodyDef.type = b2Body.b2_dynamicBody 
         fixDef.shape = new b2PolygonShape
-        fixDef.shape.SetAsBox(0.5, 1)
-                              
-        bodyDef.position.x = 5
-        bodyDef.position.y = 5
+        fixDef.shape.SetAsBox(0.5, 1)                         
+        bodyDef.position = Point(entityData.x * SCALE, entityData.y * SCALE)
         world.CreateBody(bodyDef).CreateFixture(fixDef)  
   
       if entityData.class
-        entityData.class.constantize()(entityData)
+        bodyDef.userData = entityData.class.constantize()(entityData)
+        log bodyDef
       else
-        GameObject(entityData)
+        bodyDef.userData = GameObject(entityData)
     
     self =
       add: (entityData) ->
