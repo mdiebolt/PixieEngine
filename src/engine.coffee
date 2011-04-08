@@ -76,7 +76,7 @@
     draw = ->
       canvas.withTransform cameraTransform, (canvas) ->
         if backgroundColor
-          canvas.fill(backgroundColor)
+          canvas.fill('transparent')
         objects.invoke("draw", canvas)
 
     step = ->
@@ -93,7 +93,10 @@
         bodyDef.type = b2Body.b2_dynamicBody
         bodyDef.fixedRotation = true
         rect((entityData.width / 2) * SCALE, (entityData.height / 2) * SCALE) 
-        bodyDef.position = vec(entityData.x * SCALE, entityData.y * SCALE)
+        bodyDef.position = vec(          
+          (entityData.x + (entityData.width / 2)) * SCALE, 
+          (entityData.y + (entityData.height / 2)) * SCALE
+        )
 
         body = world.CreateBody(bodyDef)        
         body.CreateFixture(fixDef) 
@@ -102,7 +105,10 @@
       else if entityData.class != "Contrasaur"
         bodyDef.type = b2Body.b2_staticBody
         rect((entityData.width / 2) * SCALE, (entityData.height / 2) * SCALE) 
-        bodyDef.position = vec(entityData.x + (entityData.width / 2) * SCALE, entityData.y * SCALE)
+        bodyDef.position = vec(
+          (entityData.x + (entityData.width / 2)) * SCALE, 
+          (entityData.y + (entityData.height / 2)) * SCALE
+        )
 
         body = world.CreateBody(bodyDef)        
         body.CreateFixture(fixDef)    
