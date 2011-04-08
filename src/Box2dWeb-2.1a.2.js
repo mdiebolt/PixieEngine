@@ -2496,7 +2496,8 @@ _A2J_postDefs = []; /* source: disabled*/
       __this.m_pairCount = 0;
       var queryProxy;
 
-      for (var i=0; i < __this.m_moveBuffer.length; i++) {
+      var len = __this.m_moveBuffer.length
+      for (var i=0; i < len; i++) {
          queryProxy = __this.m_moveBuffer[i]; {
             function QueryCallback(proxy) {
                if (proxy == queryProxy) return true;
@@ -3994,7 +3995,8 @@ _A2J_postDefs = []; /* source: disabled*/
       var v = new Vector();
       var tVec;
 
-      for (var i = 0; i < vertices.length; i++) {
+      var len = vertices.length
+      for (var i = 0; i < len; i++) {
          tVec = vertices[i]; {
             v.push(tVec);
          }
