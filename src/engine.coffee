@@ -40,7 +40,7 @@
     {b2MassData, b2PolygonShape, b2CircleShape} = Box2D.Collision.Shapes     
 
     world = new b2World(vec(0, 40), true)
-    world.SetWarmStarting(false)
+    world.SetWarmStarting(true)
 
     fixDef = new b2FixtureDef
     fixDef.density = DENSITY
@@ -50,18 +50,20 @@
     bodyDef = new b2BodyDef
     bodyDef.bullet = false
 
+    ###
     # setup debug draw
     debugDraw = new b2DebugDraw()      
     debugDraw.SetSprite(options.canvas.get(0).getContext("2d"))
-    debugDraw.SetDrawScale(10.0)
+    debugDraw.SetDrawScale(1.0)
     debugDraw.SetFillAlpha(0.3)
     debugDraw.SetLineThickness(1.0)
     debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
     world.SetDebugDraw(debugDraw)   
+    ###
 
     updatePhysics = ->
       world.Step(1 / 60, 10, 10)     
-      world.DrawDebugData()
+      #world.DrawDebugData()
       world.ClearForces()  
 
     # End Physics
