@@ -28,7 +28,7 @@
       fixDef.shape.SetAsBox(x, y)
 
     window.SCALE = 0.1
-    window.debug = false
+    window.debug = true
 
     world = null
 
@@ -40,7 +40,7 @@
 
     fixDef = new b2FixtureDef
     fixDef.density = 1.0
-    fixDef.friction = 0.5
+    fixDef.friction = 0.3
     fixDef.restitution = 0.2
 
     bodyDef = new b2BodyDef
