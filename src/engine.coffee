@@ -91,6 +91,7 @@
     construct = (entityData) -> 
       if entityData.class == "Moogle"      
         bodyDef.type = b2Body.b2_dynamicBody
+        bodyDef.fixedRotation = true
         rect((entityData.width / 2) * SCALE, (entityData.height / 2) * SCALE) 
         bodyDef.position = vec(entityData.x * SCALE, entityData.y * SCALE)
 
