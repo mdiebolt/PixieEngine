@@ -11,6 +11,7 @@ Moogle = (I) ->
   shooting = false
   laserEndpoint = null
 
+  ###
   physics = ->
     if keydown.up
       I.bodyData.ApplyImpulse(vec(0, -50), I.bodyData.GetPosition())        
@@ -18,6 +19,7 @@ Moogle = (I) ->
       I.bodyData.ApplyImpulse(vec(50, 0), I.bodyData.GetPosition())
     if keydown.left
       I.bodyData.ApplyImpulse(vec(-50, 0), I.bodyData.GetPosition())
+  ###
 
   laserColors = [
     "rgba(255, 0, 128, 0.75)"
@@ -39,7 +41,7 @@ Moogle = (I) ->
             canvas.drawLine(laserStart.x, laserStart.y, laserEndpoint.x, laserEndpoint.y, 2)
 
       update: ->
-        physics()
+        physics?()
 
         if Mouse.left
           shootDirection = Mouse.location.subtract(I)
