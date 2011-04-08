@@ -71,7 +71,7 @@
             x = object.I.bodyData?.GetPosition().x / SCALE - (object.I.width / 2)
             y = object.I.bodyData?.GetPosition().y / SCALE - (object.I.height / 2)
 
-            canvas.fillColor 'rgba(0, 200, 0, 0.3)'
+            canvas.fillColor Color(0, 200, 0, 0.3)
             canvas.fillRect(x, y, object.I.width, object.I.height)       
 
     step = ->
