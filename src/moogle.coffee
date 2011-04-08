@@ -9,8 +9,9 @@ Moogle = (I) ->
     excludedModules: ["Movable"]
 
   physics = ->
-    if keydown.up
-      I.bodyData.ApplyImpulse(vec(0, -20), I.bodyData.GetPosition())        
+    if keydown.space    
+      if I.bodyData.GetLinearVelocity().y > -.25   
+        I.bodyData.ApplyImpulse(vec(0, -20), I.bodyData.GetPosition())        
     if keydown.right
       I.bodyData.ApplyImpulse(vec(6, 0), I.bodyData.GetPosition())
     if keydown.left
