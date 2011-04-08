@@ -106,5 +106,9 @@ Moogle = (I) ->
               I.active = false
               engine.queue(nextLevel)
 
+    after:
+      update: ->
+        I.x = I.bodyData.GetPosition().x / SCALE
+        I.y = I.bodyData.GetPosition().y / SCALE
   self
 
