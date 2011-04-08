@@ -13,11 +13,11 @@ Moogle = (I) ->
 
   physics = ->
     if keydown.up
-      I.bodyData.ApplyImpulse(vec(0, -50), I.bodyData.GetPosition())        
+      I.bodyData.ApplyImpulse(vec(0, -20), I.bodyData.GetPosition())        
     if keydown.right
-      I.bodyData.ApplyImpulse(vec(50, 0), I.bodyData.GetPosition())
+      I.bodyData.ApplyImpulse(vec(20, 0), I.bodyData.GetPosition())
     if keydown.left
-      I.bodyData.ApplyImpulse(vec(-50, 0), I.bodyData.GetPosition())
+      I.bodyData.ApplyImpulse(vec(-20, 0), I.bodyData.GetPosition())
 
   laserColors = [
     "rgba(255, 0, 128, 0.75)"
