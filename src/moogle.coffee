@@ -108,7 +108,7 @@ Moogle = (I) ->
 
     after:
       update: ->
-        I.x = I.bodyData.GetPosition().x / SCALE
-        I.y = I.bodyData.GetPosition().y / SCALE
+        I.x = (I.bodyData.GetPosition().x / SCALE) - (I.width / 2)
+        I.y = I.bodyData.GetPosition().y / SCALE - (I.height / 2)
   self
 
