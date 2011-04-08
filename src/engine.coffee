@@ -19,6 +19,7 @@
 
     cameraTransform = Matrix.IDENTITY
 
+    ###  
     # Physics
     window.vec = (x, y) ->
       new b2Vec2(x, y)
@@ -63,6 +64,7 @@
       world.ClearForces()  
 
     # End Physics
+    ###
 
     update = ->
       objects = objects.select (object) ->
@@ -71,12 +73,12 @@
       objects = objects.concat(queuedObjects)
       queuedObjects = []
 
-      updatePhysics()
+      updatePhysics?()
 
     draw = ->
       canvas.withTransform cameraTransform, (canvas) ->
         if backgroundColor
-          canvas.fill('transparent')
+          canvas.fill(backgroundColor)
         objects.invoke("draw", canvas)
 
     step = ->
@@ -89,6 +91,7 @@
     canvas = options.canvas || $("<canvas />").powerCanvas()
 
     construct = (entityData) -> 
+      ###
       if entityData.class == "Moogle"      
         bodyDef.type = b2Body.b2_dynamicBody
         rect(entityData.width * SCALE, entityData.height * SCALE) 
@@ -104,7 +107,8 @@
         bodyDef.position = vec(entityData.x * SCALE, entityData.y * SCALE)
 
         body = world.CreateBody(bodyDef)        
-        body.CreateFixture(fixDef)         
+        body.CreateFixture(fixDef)  
+      ###       
 
       if entityData.class
         entityData.class.constantize()(entityData)
