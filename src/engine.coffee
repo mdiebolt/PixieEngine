@@ -48,6 +48,8 @@
 
     bodyDef = new b2BodyDef
 
+    bodyDef.isBullet = false
+
     # setup debug draw
     debugDraw = new b2DebugDraw()      
     debugDraw.SetSprite(options.canvas.get(0).getContext("2d"))
