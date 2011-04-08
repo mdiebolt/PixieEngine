@@ -2,12 +2,6 @@ window.engine = Engine
   canvas: $("canvas").powerCanvas()
   FPS: 60
 
-block = 
-  color: "#CB8"
-  width: 32
-  height: 32
-  solid: true
-
 engine.loadState(Local.get("level"))
 
 engine.start()
@@ -31,12 +25,6 @@ $(document).mousedown (event) ->
         parent.editProperties(object.I)
 
         objectToUpdate = object
-
-    else if event.which == 2 || keydown.shift
-      engine.add $.extend(
-        x: event.pageX.snap(32)
-        y: event.pageY.snap(32)
-      , block)
 
 $(document).bind "keydown", "esc", () ->
   developer = !developer
