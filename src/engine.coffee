@@ -76,7 +76,7 @@
     draw = ->
       canvas.withTransform cameraTransform, (canvas) ->
         if backgroundColor
-          canvas.fill('transparent')
+          canvas.fill(backgroundColor)
         objects.invoke("draw", canvas)
 
     step = ->
@@ -84,7 +84,7 @@
         update()
         age += 1
 
-      draw()
+      #draw()
 
     canvas = options.canvas || $("<canvas />").powerCanvas()
 
@@ -101,7 +101,7 @@
       else if entityData.class != "Contrasaur"
         bodyDef.type = b2Body.b2_staticBody
         rect((entityData.width / 2) * SCALE, (entityData.height / 2) * SCALE) 
-        bodyDef.position = vec(entityData.x * SCALE, entityData.y * SCALE)
+        bodyDef.position = vec(entityData.x + (entityData.width / 2) * SCALE, entityData.y * SCALE)
 
         body = world.CreateBody(bodyDef)        
         body.CreateFixture(fixDef)    
