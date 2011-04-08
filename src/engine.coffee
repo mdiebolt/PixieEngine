@@ -27,6 +27,8 @@
       fixDef.shape = new b2PolygonShape
       fixDef.shape.SetAsBox(x, y)
 
+    window.SCALE = 0.1
+
     world = null
 
     b2Vec2 = Box2D.Common.Math.b2Vec2
@@ -46,7 +48,7 @@
     bodyDef.bullet = false
 
     updatePhysics = ->
-      world.Step(1 / 60, 10, 10)     
+      world.Step(1 / 30, 10, 10)     
       world.ClearForces()  
 
     # End Physics
