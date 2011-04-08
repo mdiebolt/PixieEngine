@@ -12,9 +12,9 @@ Moogle = (I) ->
     if keydown.up
       I.bodyData.ApplyImpulse(vec(0, -20), I.bodyData.GetPosition())        
     if keydown.right
-      I.bodyData.ApplyImpulse(vec(20, 0), I.bodyData.GetPosition())
+      I.bodyData.ApplyImpulse(vec(6, 0), I.bodyData.GetPosition())
     if keydown.left
-      I.bodyData.ApplyImpulse(vec(-20, 0), I.bodyData.GetPosition())
+      I.bodyData.ApplyImpulse(vec(-6, 0), I.bodyData.GetPosition())
 
   self = GameObject(I).extend
     before:
