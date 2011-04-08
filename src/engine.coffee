@@ -54,22 +54,17 @@
     rect(60, 2)
     world.CreateBody(bodyDef).CreateFixture(fixDef)
 
-    # boxes in air
-    bodyDef.position = vec(60, 50)
-    rect(20, 20)
-    world.CreateBody(bodyDef).CreateFixture(fixDef)
-
     # setup debug draw
     debugDraw = new b2DebugDraw()      
     debugDraw.SetSprite(options.canvas.get(0).getContext("2d"))
-    debugDraw.SetDrawScale(5.0)
+    debugDraw.SetDrawScale(2.0)
     debugDraw.SetFillAlpha(0.3)
     debugDraw.SetLineThickness(1.0)
     debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
     world.SetDebugDraw(debugDraw)   
 
     updatePhysics = ->
-      world.Step(1 / 60, 10, 10)     
+      world.Step(1 / 30, 10, 10)     
       world.DrawDebugData()
       world.ClearForces()  
 
@@ -95,7 +90,7 @@
         update()
         age += 1
 
-      draw()
+      #draw()
 
     canvas = options.canvas || $("<canvas />").powerCanvas()
 
@@ -109,6 +104,13 @@
         body.CreateFixture(fixDef) 
 
         $.extend(entityData, { bodyData: body })
+      else
+        bodyDef.type = b2Body.b2_staticBody
+        rect(entityData.width * SCALE, entityData.height * SCALE) 
+        bodyDef.position = vec(entityData.x * SCALE, entityData.y * SCALE)
+
+        body = world.CreateBody(bodyDef)        
+        body.CreateFixture(fixDef)         
 
       if entityData.class
         entityData.class.constantize()(entityData)
