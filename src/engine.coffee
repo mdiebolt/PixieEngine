@@ -27,11 +27,6 @@
       fixDef.shape = new b2PolygonShape
       fixDef.shape.SetAsBox(x, y)
 
-    window.SCALE = 0.1
-    DENSITY = 1.0
-    FRICTION = 0.5
-    RESTITUTION = 0.2
-
     world = null
 
     b2Vec2 = Box2D.Common.Math.b2Vec2
@@ -43,9 +38,9 @@
     world.SetWarmStarting(true)
 
     fixDef = new b2FixtureDef
-    fixDef.density = DENSITY
-    fixDef.friction = FRICTION
-    fixDef.restitution = RESTITUTION
+    fixDef.density = 1.0
+    fixDef.friction = 0.5
+    fixDef.restitution = 0.2
 
     bodyDef = new b2BodyDef
     bodyDef.bullet = false
