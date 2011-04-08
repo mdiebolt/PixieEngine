@@ -50,20 +50,8 @@
     bodyDef = new b2BodyDef
     bodyDef.bullet = false
 
-    ###
-    # setup debug draw
-    debugDraw = new b2DebugDraw()      
-    debugDraw.SetSprite(options.canvas.get(0).getContext("2d"))
-    debugDraw.SetDrawScale(1.0)
-    debugDraw.SetFillAlpha(0.3)
-    debugDraw.SetLineThickness(1.0)
-    debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
-    world.SetDebugDraw(debugDraw)   
-    ###
-
     updatePhysics = ->
       world.Step(1 / 60, 10, 10)     
-      #world.DrawDebugData()
       world.ClearForces()  
 
     # End Physics
@@ -81,7 +69,15 @@
       canvas.withTransform cameraTransform, (canvas) ->
         if backgroundColor
           canvas.fill(backgroundColor)
-        objects.invoke("draw", canvas)
+
+        objects.each (object) ->
+          object.draw(canvas)
+          if object.I
+            x = object.I.bodyData?.GetPosition().x / SCALE - (object.I.width / 2)
+            y = object.I.bodyData?.GetPosition().y / SCALE - (object.I.height / 2)
+
+            canvas.strokeColor 'rgba(0, 200, 0, 0.3)'
+            canvas.strokeRect(x, y, object.I.width, object.I.height)          
 
     step = ->
       unless paused
