@@ -40,6 +40,7 @@
     {b2MassData, b2PolygonShape, b2CircleShape} = Box2D.Collision.Shapes     
 
     world = new b2World(vec(0, 40), true)
+    world.SetWarmStarting(false)
 
     fixDef = new b2FixtureDef
     fixDef.density = DENSITY
@@ -47,8 +48,6 @@
     fixDef.restitution = RESTITUTION
 
     bodyDef = new b2BodyDef
-
-    bodyDef.isBullet = false
 
     # setup debug draw
     debugDraw = new b2DebugDraw()      
@@ -102,6 +101,7 @@
 
         body = world.CreateBody(bodyDef)        
         body.CreateFixture(fixDef) 
+        body.SetBullet(false)
 
         $.extend(entityData, { bodyData: body })
       else if entityData.class != "Contrasaur"
@@ -113,7 +113,8 @@
         )
 
         body = world.CreateBody(bodyDef)        
-        body.CreateFixture(fixDef)    
+        body.CreateFixture(fixDef) 
+        body.SetBullet(false)   
 
       if entityData.class
         entityData.class.constantize()(entityData)
