@@ -48,6 +48,7 @@
     fixDef.restitution = RESTITUTION
 
     bodyDef = new b2BodyDef
+    bodyDef.bullet = false
 
     # setup debug draw
     debugDraw = new b2DebugDraw()      
@@ -77,7 +78,7 @@
     draw = ->
       canvas.withTransform cameraTransform, (canvas) ->
         if backgroundColor
-          canvas.fill('transparent')
+          canvas.fill(backgroundColor)
         objects.invoke("draw", canvas)
 
     step = ->
