@@ -32,12 +32,10 @@
     world = null
 
     b2Vec2 = Box2D.Common.Math.b2Vec2
-    b2AABB = Box2D.Collision.b2AABB
-    {b2BodyDef, b2Body, b2FixtureDef, b2Fixture, b2World, b2DebugDraw} = Box2D.Dynamics
-    {b2MassData, b2PolygonShape, b2CircleShape} = Box2D.Collision.Shapes     
+    {b2BodyDef, b2Body, b2FixtureDef, b2Fixture, b2World} = Box2D.Dynamics
+    {b2PolygonShape, b2CircleShape} = Box2D.Collision.Shapes     
 
     world = new b2World(vec(0, 40), true)
-    world.SetWarmStarting(true)
 
     fixDef = new b2FixtureDef
     fixDef.density = 1.0
@@ -45,11 +43,10 @@
     fixDef.restitution = 0.2
 
     bodyDef = new b2BodyDef
-    bodyDef.bullet = false
 
     updatePhysics = ->
       world.Step(1 / 30, 10, 10)     
-      world.ClearForces()  
+      world.ClearForces() 
 
     # End Physics
 
@@ -73,8 +70,8 @@
             x = object.I.bodyData?.GetPosition().x / SCALE - (object.I.width / 2)
             y = object.I.bodyData?.GetPosition().y / SCALE - (object.I.height / 2)
 
-            canvas.strokeColor 'rgba(0, 200, 0, 0.3)'
-            canvas.strokeRect(x, y, object.I.width, object.I.height)          
+            canvas.fillColor 'rgba(0, 200, 0, 0.3)'
+            canvas.fillRect(x, y, object.I.width, object.I.height)          
 
     step = ->
       unless paused
@@ -97,9 +94,9 @@
 
         body = world.CreateBody(bodyDef)        
         body.CreateFixture(fixDef) 
-        body.SetBullet(false)
 
         $.extend(entityData, { bodyData: body })
+
       else if entityData.class != "Contrasaur"
         bodyDef.type = b2Body.b2_staticBody
         rect((entityData.width / 2) * SCALE, (entityData.height / 2) * SCALE) 
@@ -109,8 +106,9 @@
         )
 
         body = world.CreateBody(bodyDef)        
-        body.CreateFixture(fixDef) 
-        body.SetBullet(false)   
+        body.CreateFixture(fixDef)
+
+        $.extend(entityData, { bodyData: body }) 
 
       if entityData.class
         entityData.class.constantize()(entityData)
