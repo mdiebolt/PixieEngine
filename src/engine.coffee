@@ -19,7 +19,6 @@
 
     cameraTransform = Matrix.IDENTITY
 
-    ###  
     # Physics
     window.vec = (x, y) ->
       new b2Vec2(x, y)
@@ -52,7 +51,7 @@
     # setup debug draw
     debugDraw = new b2DebugDraw()      
     debugDraw.SetSprite(options.canvas.get(0).getContext("2d"))
-    debugDraw.SetDrawScale(10.0)
+    debugDraw.SetDrawScale(8.0)
     debugDraw.SetFillAlpha(0.3)
     debugDraw.SetLineThickness(1.0)
     debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
@@ -64,7 +63,6 @@
       world.ClearForces()  
 
     # End Physics
-    ###
 
     update = ->
       objects = objects.select (object) ->
@@ -73,7 +71,7 @@
       objects = objects.concat(queuedObjects)
       queuedObjects = []
 
-      updatePhysics?()
+      updatePhysics()
 
     draw = ->
       canvas.withTransform cameraTransform, (canvas) ->
@@ -86,12 +84,11 @@
         update()
         age += 1
 
-      draw()
+      #draw()
 
     canvas = options.canvas || $("<canvas />").powerCanvas()
 
     construct = (entityData) -> 
-      ###
       if entityData.class == "Moogle"      
         bodyDef.type = b2Body.b2_dynamicBody
         rect(entityData.width * SCALE, entityData.height * SCALE) 
@@ -107,8 +104,7 @@
         bodyDef.position = vec(entityData.x * SCALE, entityData.y * SCALE)
 
         body = world.CreateBody(bodyDef)        
-        body.CreateFixture(fixDef)  
-      ###       
+        body.CreateFixture(fixDef)         
 
       if entityData.class
         entityData.class.constantize()(entityData)
