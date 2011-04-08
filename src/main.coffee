@@ -19,7 +19,6 @@ $(document).bind "contextmenu", (event) ->
 
 $(document).mousedown (event) ->
   if developer
-
     if event.which == 3
       if object = engine.objectAt(event.pageX, event.pageY)
         parent.editProperties(object.I)
