@@ -28,7 +28,7 @@
       fixDef.shape.SetAsBox(x, y)
 
     window.SCALE = 0.1
-    window.debug = true
+    window.debug = false
 
     world = null
 
