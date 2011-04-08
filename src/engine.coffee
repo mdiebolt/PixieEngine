@@ -48,16 +48,10 @@
 
     bodyDef = new b2BodyDef
 
-    # ground   
-    bodyDef.position = vec(65, 90)
-    bodyDef.fixedRotation = true
-    rect(60, 2)
-    world.CreateBody(bodyDef).CreateFixture(fixDef)
-
     # setup debug draw
     debugDraw = new b2DebugDraw()      
     debugDraw.SetSprite(options.canvas.get(0).getContext("2d"))
-    debugDraw.SetDrawScale(2.0)
+    debugDraw.SetDrawScale(10.0)
     debugDraw.SetFillAlpha(0.3)
     debugDraw.SetLineThickness(1.0)
     debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
