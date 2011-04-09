@@ -28,7 +28,7 @@
       fixDef.shape.SetAsBox(x, y)
 
     window.SCALE = 0.1
-    window.debug = false
+    window.debug = true
 
     world = null
 
@@ -98,7 +98,7 @@
 
         $.extend(entityData, { bodyData: body })
 
-      else if entityData.class != "Contrasaur"
+      else
         bodyDef.type = b2Body.b2_staticBody
         rect((entityData.width / 2) * SCALE, (entityData.height / 2) * SCALE) 
         bodyDef.position = vec(
